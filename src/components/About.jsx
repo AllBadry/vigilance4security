@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { Shield, Award, GraduationCap, HeartPulse, Shirt, Building2, Car, Briefcase, Lock, ShieldAlert, Globe, BriefcaseBusiness } from 'lucide-react';
+import { pillars as tabsData, staff, uniform, services } from '../data/about';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -13,28 +15,8 @@ export default function About() {
   const btnRef = useRef(null);
   const [activeTab, setActiveTab] = useState(0);
 
-  const tabsData = [
-    {
-      title: "من نحن",
-      desc: "مجموعة اليقظة (V4S) هي شركة رائدة في مجال تقديم الحلول الأمنية المتكاملة، نجمع بين الكفاءات البشرية عالية التدريب وأحدث التقنيات التكنولوجية لضمان حماية أصولك."
-    },
-    {
-      title: "رؤيتنا",
-      desc: "أن نكون الخيار الأول والمعيار الذهبي في قطاع الأمن والحماية على مستوى المنطقة، من خلال تقديم خدمات أمنية لا تقبل المساومة وتواكب تحديات المستقبل."
-    },
-    {
-      title: "مهمتنا",
-      desc: "توفير بيئة آمنة ومستقرة لعملائنا تمكنهم من التركيز على نمو أعمالهم، عبر تطبيق بروتوكولات أمنية صارمة واستجابة فورية لأي طوارئ."
-    },
-    {
-      title: "القيم الجوهرية",
-      desc: "الانضباط العسكري، السرية التامة، النزاهة، والابتكار التكنولوجي المستمر لضمان تفوقنا في تقديم الحماية."
-    },
-    {
-      title: "غرفة العمليات",
-      desc: "مركز تحكم وسيطرة مجهز بأحدث تقنيات الذكاء الاصطناعي والمراقبة، يعمل على مدار الساعة لضمان التنسيق والتدخل السريع لجميع فرقنا الميدانية."
-    }
-  ];
+  const staffIcons = [Shield, GraduationCap, Award, HeartPulse];
+  const serviceIcons = [Building2, Car, BriefcaseBusiness, Lock, ShieldAlert, Globe];
 
   useEffect(() => {
     let ctx = gsap.context(() => {
@@ -185,6 +167,91 @@ export default function About() {
           >
             اكتشف المزيد
           </a>
+        </div>
+
+        {/* ============ التفاصيل الإضافية ============ */}
+        <div className="w-full mt-20 md:mt-28 space-y-20 md:space-y-28">
+
+          {/* من هم موظفونا */}
+          <div>
+            <div className="text-center mb-10 md:mb-14">
+              <h3 className="text-2xl md:text-3xl font-bold text-slate-900 mb-4">من هم موظفونا</h3>
+              <p className="text-slate-500 text-sm md:text-base font-medium max-w-2xl mx-auto">
+                لا نقدّم حلولاً تكنولوجية فقط — بل حراساً ورجال أمن مدربين ومؤهلين.
+              </p>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
+              {staff.map((item, i) => {
+                const Icon = staffIcons[i % staffIcons.length];
+                return (
+                  <div key={item.title} className="group relative bg-white border border-slate-200 rounded-sm p-6 md:p-7 transition-all duration-300 hover:border-amber-500/60 hover:shadow-[0_18px_40px_rgba(0,0,0,0.08)] hover:-translate-y-1">
+                    <span className="absolute top-0 left-0 w-10 h-[3px] bg-amber-500 transition-all duration-500 group-hover:w-full"></span>
+                    <Icon className="w-8 h-8 text-[#0a1526] mb-5" strokeWidth={1.5} />
+                    <h4 className="text-base md:text-lg font-bold text-slate-900 mb-3">{item.title}</h4>
+                    <p className="text-slate-600 text-sm leading-relaxed">{item.desc}</p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* اللباس الرسمي */}
+          <div className="bg-[#0a1526] text-white rounded-sm p-8 md:p-12 relative overflow-hidden">
+            <div className="absolute -top-16 -left-16 w-56 h-56 bg-amber-500/10 rounded-full blur-3xl"></div>
+            <div className="relative flex flex-col md:flex-row items-start gap-6 md:gap-8">
+              <div className="shrink-0 w-14 h-14 md:w-16 md:h-16 rounded-full bg-amber-500/15 border border-amber-500/40 flex items-center justify-center">
+                <Shirt className="w-7 h-7 md:w-8 md:h-8 text-amber-500" strokeWidth={1.5} />
+              </div>
+              <div className="flex-1">
+                <h3 className="text-xl md:text-2xl font-bold mb-4">{uniform.title}</h3>
+                <p className="text-white/75 text-sm md:text-base leading-loose">{uniform.desc}</p>
+              </div>
+            </div>
+          </div>
+
+          {/* خدمات الشركة */}
+          <div>
+            <div className="text-center mb-10 md:mb-14">
+              <h3 className="text-2xl md:text-3xl font-bold text-slate-900 mb-4">خدمات التي تقدمها الشركة</h3>
+              <p className="text-slate-500 text-sm md:text-base font-medium max-w-2xl mx-auto">
+                تغطية متكاملة للمنشآت والمرافقة والتدريب ونقل الأموال والمناسبات.
+              </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
+              {services.map((item, i) => {
+                const Icon = serviceIcons[i % serviceIcons.length];
+                return (
+                  <div key={item.title} className="flex items-start gap-4 bg-white border border-slate-200 rounded-sm p-6 transition-all duration-300 hover:border-amber-500/60 hover:shadow-[0_14px_30px_rgba(0,0,0,0.07)]">
+                    <div className="shrink-0 w-11 h-11 rounded-sm bg-[#0a1526] flex items-center justify-center">
+                      <Icon className="w-5 h-5 text-amber-500" strokeWidth={1.6} />
+                    </div>
+                    <div>
+                      <h4 className="text-base font-bold text-slate-900 mb-2">{item.title}</h4>
+                      <p className="text-slate-600 text-sm leading-relaxed">{item.desc}</p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* زر العمل معنا */}
+          <div className="border-2 border-slate-900 rounded-sm p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-right">
+            <div>
+              <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-3">تعمل معنا؟</h3>
+              <p className="text-slate-600 text-sm md:text-base max-w-xl">
+                نبحث عن أشخاص ملتزمين بالانضباط والجاهزية. أرسل سيرتك وبياناتك وسيتم التواصل معك مباشرة.
+              </p>
+            </div>
+            <a
+              href="#contact"
+              className="shrink-0 inline-flex items-center justify-center gap-2 px-9 py-4 bg-amber-500 hover:bg-[#0a1526] hover:text-white text-[#0a1526] font-bold text-sm tracking-widest uppercase transition-colors duration-300 rounded-sm shadow-lg shadow-amber-500/10"
+            >
+              <Briefcase className="w-4 h-4" />
+              أرسل طلبك
+            </a>
+          </div>
+
         </div>
 
       </div>
