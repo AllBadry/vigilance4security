@@ -4,15 +4,17 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import {
   ShieldCheck, Eye, Target, Gem, Radar, ChevronLeft, Phone, Mail, ArrowLeft,
+  Shield, Award, GraduationCap, HeartPulse, Shirt,
 } from 'lucide-react';
 import {
-  aboutHero, pillars, milestones, expertise, footage, contact,
+  aboutHero, pillars, taglines, staff, uniform, milestones, services, footage, contact,
 } from '../data/about';
 import '../styles/fonts.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const pillarIcons = [ShieldCheck, Target, Eye, Gem, Radar];
+const staffIcons = [Shield, Award, GraduationCap, HeartPulse];
 
 function LazyClip({ src, poster, caption, credit }) {
   const wrapRef = useRef(null);
@@ -252,6 +254,9 @@ export default function AboutPage() {
           <p className="mt-7 text-base md:text-lg text-slate-300 max-w-2xl leading-relaxed font-medium">
             {aboutHero.lead}
           </p>
+          <p className="mt-6 text-lg md:text-2xl font-bold text-amber-400 max-w-2xl leading-snug">
+            {aboutHero.tagline}
+          </p>
           <a href="#journey" className="group mt-10 inline-flex items-center gap-2 w-fit text-white font-bold text-lg border-b border-white/40 pb-1 hover:border-amber-400 hover:text-amber-400 transition-all">
             رحلتنا
             <ChevronLeft className="w-5 h-5 group-hover:-translate-x-2 transition-transform" />
@@ -289,7 +294,53 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section id="journey" className="relative bg-[#050d1a] py-24 md:py-32">
+      <section className="relative bg-[#050d1a] py-24 md:py-32">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="ab-reveal flex flex-col items-center text-center mb-16">
+            <div className="inline-flex items-center gap-3 mb-4">
+              <span className="w-8 h-[1px] bg-amber-500" />
+              <span className="text-amber-500 font-bold text-xs tracking-[0.2em] uppercase">موظفونا</span>
+              <span className="w-8 h-[1px] bg-amber-500" />
+            </div>
+            <h2 className="text-3xl md:text-5xl font-black text-white leading-tight">
+              كوادر <span className="text-amber-400">مؤهلة</span>
+            </h2>
+            <p className="mt-6 text-slate-400 max-w-2xl leading-loose font-medium">
+              لا نقدّم حلولاً تكنولوجية فقط — بل حراساً ورجال أمن مدربين ومؤهلين.
+            </p>
+          </div>
+
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {staff.map((item, i) => {
+              const Icon = staffIcons[i] || Shield;
+              return (
+                <article
+                  key={item.title}
+                  className="ab-reveal group relative p-7 rounded-sm border border-white/10 bg-white/[0.02] hover:border-amber-500/50 transition-colors duration-500"
+                >
+                  <span className="w-12 h-12 rounded-full bg-amber-500/10 border border-amber-500/30 flex items-center justify-center mb-5">
+                    <Icon className="w-5 h-5 text-amber-400" />
+                  </span>
+                  <h3 className="text-lg md:text-xl font-bold text-white mb-3">{item.title}</h3>
+                  <p className="text-slate-400 text-sm leading-loose font-medium">{item.desc}</p>
+                </article>
+              );
+            })}
+          </div>
+
+          <div className="ab-reveal mt-8 rounded-sm border border-amber-500/30 bg-amber-500/[0.04] p-7 md:p-9 flex flex-col md:flex-row gap-6 items-start md:items-center">
+            <span className="w-14 h-14 rounded-full bg-amber-500/15 border border-amber-500/40 flex items-center justify-center shrink-0">
+              <Shirt className="w-6 h-6 text-amber-400" />
+            </span>
+            <div>
+              <h3 className="text-xl md:text-2xl font-bold text-white mb-3">{uniform.title}</h3>
+              <p className="text-slate-300 leading-loose font-medium">{uniform.desc}</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="journey" className="relative bg-[#0a1526] py-24 md:py-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="ab-reveal flex flex-col items-center text-center mb-20">
             <div className="inline-flex items-center gap-3 mb-4">
@@ -339,16 +390,16 @@ export default function AboutPage() {
           <div className="ab-reveal flex flex-col items-center text-center mb-16">
             <div className="inline-flex items-center gap-3 mb-4">
               <span className="w-8 h-[1px] bg-amber-500" />
-              <span className="text-amber-500 font-bold text-xs tracking-[0.2em] uppercase">خبراتنا</span>
+              <span className="text-amber-500 font-bold text-xs tracking-[0.2em] uppercase">خدمات الشركة</span>
               <span className="w-8 h-[1px] bg-amber-500" />
             </div>
             <h2 className="text-3xl md:text-5xl font-black text-white leading-tight">
-              أين نضع <span className="text-amber-400">خبرتنا</span>
+              خدمات <span className="text-amber-400">نقدمها</span>
             </h2>
           </div>
 
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {expertise.map((item, i) => (
+            {services.map((item, i) => (
               <article
                 key={item.title}
                 className={`group relative overflow-hidden rounded-sm h-[380px] border border-white/10 ${
@@ -426,7 +477,7 @@ export default function AboutPage() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="ab-reveal text-2xl md:text-4xl font-black text-white mb-5">هل تبحث عن حماية متكاملة؟</h2>
           <p className="ab-reveal text-slate-400 mb-10 leading-loose font-medium">
-            تواصل مع فريق غرفة العمليات المركزية مباشرة، أو اطلع على خدماتنا الكاملة.
+            {taglines[1]}
           </p>
           <div className="ab-reveal flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
@@ -451,6 +502,23 @@ export default function AboutPage() {
             <ArrowLeft className="w-4 h-4 rotate-180 group-hover:-translate-x-1 transition-transform" />
             العودة إلى الرئيسية
           </Link>
+        </div>
+      </section>
+
+      <section className="relative bg-[#0a1526] py-16 md:py-20 border-t border-white/5">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          {taglines.map((line, i) => (
+            <p
+              key={i}
+              className={`ab-reveal font-bold leading-snug ${
+                i === taglines.length - 1
+                  ? 'text-xl md:text-3xl text-amber-400'
+                  : 'text-base md:text-xl text-white/70'
+              } ${i < taglines.length - 1 ? 'mb-5' : ''}`}
+            >
+              {line}
+            </p>
+          ))}
         </div>
       </section>
     </div>

@@ -1,6 +1,40 @@
 import { useState, useEffect } from 'react';
 import { Menu, X, Globe, Phone } from 'lucide-react';
 
+function LangToggle() {
+  const [lang, setLang] = useState('ar');
+  const options = [
+    { code: 'ar', label: 'AR' },
+    { code: 'en', label: 'EN' },
+  ];
+
+  return (
+    <div
+      dir="ltr"
+      className="flex items-center rounded-full border border-white/15 bg-white/5 overflow-hidden shrink-0"
+    >
+      <span className="pl-2.5 flex items-center text-white/50">
+        <Globe className="w-3.5 h-3.5" />
+      </span>
+      {options.map((opt) => (
+        <button
+          key={opt.code}
+          type="button"
+          onClick={() => setLang(opt.code)}
+          aria-pressed={lang === opt.code}
+          className={`px-3 h-9 text-xs font-bold tracking-wider transition-colors ${
+            lang === opt.code
+              ? 'bg-amber-500 text-[#0a192f]'
+              : 'text-white/60 hover:text-white'
+          }`}
+        >
+          {opt.label}
+        </button>
+      ))}
+    </div>
+  );
+}
+
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -28,53 +62,19 @@ export default function Navbar() {
           : 'bg-transparent'
       }`}
     >
-      {/* 1. الشريط العلوي المصغر (Top Bar) */}
-      <div className={`hidden md:block w-full border-b transition-all duration-500 ${
-        isScrolled ? 'border-white/5 bg-white/5' : 'border-white/10'
-      }`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-10 flex items-center justify-between text-xs font-semibold text-white/70">
-          
-          {/* الجانب الأيمن (معلومات الاتصال) */}
-          <div className="flex items-center gap-6">
-            <a href="tel:0772050091" className="flex items-center gap-2 hover:text-amber-400 transition-colors">
-              <Phone className="w-3.5 h-3.5" />
-              <span className="tracking-wider">0772050091</span>
-            </a>
-            <span className="w-px h-4 bg-white/20"></span>
-            <span className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-              غرفة العمليات المركزية جاهزة
-            </span>
-          </div>
-
-          {/* الجانب الأيسر (اللغة وروابط سريعة) */}
-          <div className="flex items-center gap-6">
-            <a href="#careers" className="hover:text-white transition-colors">الموارد البشرية</a>
-            <a href="#investors" className="hover:text-white transition-colors">علاقات المستثمرين</a>
-            <span className="w-px h-4 bg-white/20"></span>
-            <div className="flex items-center gap-2 cursor-pointer hover:text-white transition-colors group">
-              <Globe className="w-3.5 h-3.5" />
-              <span>AR</span>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      {/* 2. شريط التنقل الرئيسي (Main Navbar) */}
-      {/* تم زيادة ارتفاع الناف بار h-20 و h-28 لاستيعاب الشعار الأكبر */}
+      {/* 1. شريط التنقل الرئيسي (Main Navbar) */}
       <nav className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 transition-all duration-500 flex items-center justify-between ${
-        isScrolled ? 'h-20' : 'h-28'
+        isScrolled ? 'h-20' : 'h-24'
       }`}>
         
-        {/* الشعار - تم حل مشكلة اللون الداكن وزيادة الحجم */}
-        <a href="/" className="flex items-center group relative z-10">
+        {/* الشعار */}
+        <a href="/" className="flex items-center group relative z-10 shrink-0">
           <div>
             <img 
               src="/RRvVSLogo.png" 
               alt="اليقظة للأمن والحماية" 
               className={`object-contain transition-all duration-300 group-hover:scale-105 ${
-                isScrolled ? 'h-10 md:h-12' : 'h-14 md:h-16'
+                isScrolled ? 'h-10 md:h-12' : 'h-12 md:h-14'
               }`}
             />
           </div>
@@ -93,8 +93,18 @@ export default function Navbar() {
           ))}
         </div>
 
-        {/* زر الإجراء السريع للمكتب / الموبايل */}
-        <div className="flex items-center gap-4">
+        {/* الأزرار: الهاتف + اللغة + طلب عرض سعر */}
+        <div className="flex items-center gap-3 md:gap-4">
+          <a
+            href="tel:0772050091"
+            aria-label="اتصل بنا"
+            className="hidden sm:inline-flex w-10 h-10 items-center justify-center rounded-full border border-white/15 text-white/80 hover:text-amber-400 hover:border-amber-400/60 transition-colors"
+          >
+            <Phone className="w-4 h-4" />
+          </a>
+
+          <LangToggle />
+
           <a
             href="#request"
             className="hidden md:inline-flex items-center justify-center px-6 py-3 text-sm font-bold text-[#0a192f] bg-amber-500 hover:bg-white transition-colors rounded-sm shadow-lg shadow-amber-500/10"
@@ -127,10 +137,20 @@ export default function Navbar() {
               {link.name}
             </a>
           ))}
+          <div className="flex items-center justify-between gap-3 mt-4 px-1">
+            <a
+              href="tel:0772050091"
+              className="inline-flex items-center gap-2 px-4 py-3 rounded-sm border border-white/15 text-white/80 text-sm font-bold hover:text-amber-400 transition-colors"
+            >
+              <Phone className="w-4 h-4" />
+              <span dir="ltr">0772050091</span>
+            </a>
+            <LangToggle />
+          </div>
           <a
             href="#request"
             onClick={() => setIsMobileMenuOpen(false)}
-            className="mt-4 px-4 py-3 text-center text-sm font-bold text-[#0a192f] bg-amber-500 hover:bg-amber-400 rounded-sm transition-colors"
+            className="mt-3 px-4 py-3 text-center text-sm font-bold text-[#0a192f] bg-amber-500 hover:bg-amber-400 rounded-sm transition-colors"
           >
             طلب عرض سعر
           </a>
