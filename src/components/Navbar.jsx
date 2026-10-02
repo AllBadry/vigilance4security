@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Menu, X, Globe, Phone } from 'lucide-react';
 
 export default function Navbar() {
@@ -15,8 +15,8 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
-    { name: 'الرئيسية', href: '#home' },
-    { name: 'من نحن', href: '#about' },
+    { name: 'الرئيسية', href: '/' },
+    { name: 'من نحن', href: '/about' },
     { name: 'تواصل معنا', href: '#contact' },
   ];
 
@@ -68,10 +68,10 @@ export default function Navbar() {
       }`}>
         
         {/* الشعار - تم حل مشكلة اللون الداكن وزيادة الحجم */}
-        <a href="#home" className="flex items-center group relative z-10">
+        <a href="/" className="flex items-center group relative z-10">
           <div>
             <img 
-              src="./RRvVSLogo.png" 
+              src="/RRvVSLogo.png" 
               alt="اليقظة للأمن والحماية" 
               className={`object-contain transition-all duration-300 group-hover:scale-105 ${
                 isScrolled ? 'h-10 md:h-12' : 'h-14 md:h-16'

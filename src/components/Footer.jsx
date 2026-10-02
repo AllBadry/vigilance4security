@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Phone, Mail, MapPin, ShieldCheck, UserCheck, ChevronLeft, PhoneCall } from 'lucide-react';
@@ -168,7 +168,7 @@ export default function Footer() {
             <h4 className="text-white font-bold text-base mb-4">روابط سريعة</h4>
             <ul className="space-y-3">
               <li>
-                <a href="#about" className="text-slate-400 hover:text-amber-400 transition-colors text-sm flex items-center gap-2 group w-fit">
+                <a href="/about" className="text-slate-400 hover:text-amber-400 transition-colors text-sm flex items-center gap-2 group w-fit">
                   <ChevronLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" /> عن الشركة
                 </a>
               </li>

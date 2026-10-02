@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ChevronLeft } from 'lucide-react';
@@ -46,7 +46,7 @@ export default function Hero() {
     <section ref={containerRef} className="relative h-screen w-full overflow-hidden bg-[#0a192f] font-cairo" dir="rtl">
       
       {/* 1. الخلفية */}
-      <div className="absolute inset-0 z-0 h-[120%] -top-[10%]">
+      <div ref={bgRef} className="absolute inset-0 z-0 h-[120%] -top-[10%]">
          <video 
           src="./gemini_generated_video_3765d11c.mp4" 
           autoPlay="true"
@@ -94,7 +94,7 @@ export default function Hero() {
             بدأت قصة اليقظة كقصة استثمارية لحماية الأرواح والممتلكات. بصفتنا القوة المتنامية في قطاع الخدمات الأمنية واللوجستية، سنستمر في إضافة قيمة للمنطقة والعالم.
           </p>
 
-          <a href="#about" className="group inline-flex items-center gap-2 text-white font-bold text-lg border-b border-white/40 pb-1 hover:border-amber-400 hover:text-amber-400 transition-all">
+          <a href="/about" className="group inline-flex items-center gap-2 text-white font-bold text-lg border-b border-white/40 pb-1 hover:border-amber-400 hover:text-amber-400 transition-all">
             عن اليقظة 
             <ChevronLeft className="w-5 h-5 group-hover:-translate-x-2 transition-transform" />
           </a>
