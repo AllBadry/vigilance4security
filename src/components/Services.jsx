@@ -127,6 +127,8 @@ export default function Services() {
               <img 
                 src={sector.image} 
                 alt={sector.title} 
+                loading="lazy"
+                decoding="async"
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
               />
               <div className={`absolute inset-0 bg-gradient-to-b ${sector.gradient} opacity-90 group-hover:opacity-80 transition-opacity duration-500`}></div>

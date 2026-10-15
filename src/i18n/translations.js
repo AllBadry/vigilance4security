@@ -6,6 +6,10 @@ export const translations = {
         "مجموعة اليقظة للأمن والحماية تقدم حلولاً أمنية متكاملة: أمن المنشآت، المرافقة الأمنية، نقل الأموال، أمن الفعاليات، الاستشارات والتدريب المتخصص على مدار الساعة.",
     },
 
+    common: {
+      loading: "جارٍ التحميل...",
+    },
+
     nav: {
       home: "الرئيسية",
       about: "من نحن",
@@ -203,6 +207,10 @@ export const translations = {
       title: "Vigilance Group | Security & Protection Services",
       description:
         "Vigilance Group (V4S) delivers integrated security solutions: facility guarding, VIP security escort, cash transport, event security, consulting and specialized training — around the clock.",
+    },
+
+    common: {
+      loading: "Loading...",
     },
 
     nav: {

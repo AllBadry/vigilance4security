@@ -191,7 +191,9 @@ try {
     for (let step = 0; step < WAIT_STEPS; step++) {
       await sleep(200);
       const ready = await evaluate(
-        `document.readyState === 'complete' && !!document.querySelector('#root > *')`
+        `document.readyState === 'complete' &&
+         !!document.querySelector('#root > *') &&
+         !document.querySelector('#page-loader')`
       );
       if (ready === true) {
         mounted = true;
@@ -207,6 +209,11 @@ try {
 
     await sleep(600);
     const textLength = await evaluate(SETTLE);
+
+    if (await evaluate(`!!document.querySelector('#page-loader')`)) {
+      await sleep(1500);
+    }
+
     const html = await evaluate(`'<!doctype html>\\n' + document.documentElement.outerHTML`);
     const title = await evaluate('document.title');
     const canonical = await evaluate(
@@ -223,6 +230,7 @@ try {
     if (!canonical) problems.push('missing canonical');
     else if (!html.includes(htmlCanonical)) problems.push('canonical not in markup');
     if (!html.includes(title)) problems.push('title not in markup');
+    if (html.includes('id="page-loader"')) problems.push('lazy placeholder was captured');
     if (textLength < 300) problems.push(`too little text (${textLength})`);
     if (problems.length) {
       failures += 1;

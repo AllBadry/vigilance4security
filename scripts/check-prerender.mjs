@@ -29,6 +29,7 @@ for (const page of PAGES) {
   if (!html.includes(`content="${image}"`)) fail(`${page.path} — og:image ${image} missing`);
   if (!html.includes('name="description"')) fail(`${page.path} — meta description missing`);
   if (!html.includes('<div id="root">')) fail(`${page.path} — React root container missing`);
+  if (html.includes('id="page-loader"')) fail(`${page.path} — captured the lazy loading placeholder`);
   if (!html.includes('/assets/index-')) fail(`${page.path} — built assets missing`);
   if (html.length < 5000) fail(`${page.path} — suspiciously small output (${html.length} bytes)`);
   if (failures === 0) pass(`${page.path} → ${file.replace(DIST, 'dist')}`);

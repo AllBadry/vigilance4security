@@ -92,6 +92,8 @@ export default function Navbar() {
             <img 
               src="/RRvVSLogo_result.webp" 
               alt={t('nav.logoAlt')} 
+              fetchPriority="high"
+              decoding="async"
               className={`object-contain transition-all duration-300 group-hover:scale-105 ${
                 isScrolled ? 'h-10 md:h-12' : 'h-12 md:h-14'
               }`}

@@ -56,6 +56,8 @@ export default function Contact() {
         <img 
           src="/V4Sback_result.webp" 
           alt={t('contactSection.altBg')} 
+          loading="lazy"
+          decoding="async"
           className="w-full h-full object-cover scale-105"
         />
         {/* تدرج لوني داكن خفيف لضمان وضوح النصوص مع الحفاظ على إشراقة الصورة */}

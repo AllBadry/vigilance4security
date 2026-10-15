@@ -53,6 +53,8 @@ export default function Footer() {
         <img 
           src="/photo-1486406146926-c627a92ad1ab_result.webp" 
           alt={t('footer.altBuilding')} 
+          loading="lazy"
+          decoding="async"
           className="w-full h-full object-cover grayscale opacity-25"
         />
         {/* تدرج لوني لدمج المبنى بشكل درامي مع الخلفية */}
@@ -68,7 +70,7 @@ export default function Footer() {
           <div className="flex flex-col">
             <div className="flex items-center gap-3 mb-6">
               <div className="w-20 h-20 flex items-center justify-center p-1 ">
-                <img src="/RRvVSLogo_result.webp" alt={t('footer.logoAlt')} className="w-full h-full object-contain" />
+                <img src="/RRvVSLogo_result.webp" alt={t('footer.logoAlt')} loading="lazy" decoding="async" className="w-full h-full object-contain" />
               </div>
               <div>
                 <h3 className="text-xl font-black text-white leading-none mb-1">{t('footer.brand')}</h3>

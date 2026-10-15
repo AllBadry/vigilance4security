@@ -221,6 +221,8 @@ export default function About() {
               <img 
                 src="/6140a93d-2584-4ba5-93e6-aee4393cd2c2_result.webp" 
                 alt={t('about.altUniform')} 
+                loading="lazy"
+                decoding="async"
                 className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
               />
               {/* تدرج لوني خفيف فوق الصورة للموبايل */}

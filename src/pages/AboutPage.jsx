@@ -308,6 +308,8 @@ export default function AboutPage() {
             <img
               src="/Security Escort_result.webp"
               alt={t('aboutPage.altEscort')}
+              loading="lazy"
+              decoding="async"
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#0a1526] via-[#0a1526]/60 to-[#0a1526]/30" />

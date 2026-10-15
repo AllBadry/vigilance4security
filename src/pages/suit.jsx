@@ -55,6 +55,8 @@ export default function UniformShowcase() {
               <img 
                 src={activeImage.src} 
                 alt={activeImage.alt}
+                fetchPriority="high"
+                decoding="async"
                 className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute top-4 start-4 px-3 py-1.5 bg-white/90 backdrop-blur-sm rounded-md shadow-sm border border-slate-100 flex items-center gap-2">
@@ -78,6 +80,8 @@ export default function UniformShowcase() {
                   <img 
                     src={img.src} 
                     alt={img.alt}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover object-top"
                   />
                   {/* طبقة تظليل خفيفة للصور غير النشطة */}
