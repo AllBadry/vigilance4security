@@ -11,7 +11,7 @@ export default function UniformShowcase() {
     { id: 'full', src: '/fullsuit_result.webp', ...t('suit.images')[0] },
     { id: 'chest', src: '/chest_result.webp', ...t('suit.images')[1] },
     { id: 'shoulder', src: '/shoulder_result.webp', ...t('suit.images')[2] },
-    { id: 'cap', src: '/ccap1_result.webp', ...t('suit.images')[3] }
+    { id: 'cap', src: '/cap1_result.webp', ...t('suit.images')[3] }
   ];
 
   // حالة لتتبع الصورة المعروضة حالياً (تبدأ بالصورة الكاملة)
