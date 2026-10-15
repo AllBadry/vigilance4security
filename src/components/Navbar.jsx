@@ -149,7 +149,7 @@ export default function Navbar() {
       <div className={`lg:hidden absolute top-full left-0 w-full bg-[#0a192f]/95 backdrop-blur-xl border-b border-white/10 transition-all duration-300 overflow-y-auto overscroll-contain ${
         isMobileMenuOpen ? 'max-h-[calc(100svh-4rem)] opacity-100' : 'max-h-0 opacity-0'
       }`}>
-        <div className="safe-bottom flex flex-col px-4 py-6 gap-2">
+        <div className="safe-bottom flex flex-col px-4 pt-6 pb-10 gap-2">
           {navLinks.map((link) => (
             <Link
               key={link.to}
