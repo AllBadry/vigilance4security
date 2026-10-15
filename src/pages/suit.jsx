@@ -101,7 +101,7 @@ export default function UniformShowcase() {
               <h1 className="text-4xl sm:text-5xl font-extrabold text-[#0f172a] leading-tight mb-2">
                 {t('suit.title')}
               </h1>
-              <p className="text-xl font-bold text-slate-400 uppercase tracking-widest mb-6 font-mono">
+              <p className="text-xl font-bold text-slate-400 uppercase tracking-widest mb-6 font-mono leading-relaxed">
                 {t('suit.brandLine')}
               </p>
             </div>
