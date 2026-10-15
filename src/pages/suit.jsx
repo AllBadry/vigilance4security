@@ -11,14 +11,14 @@ export default function UniformShowcase() {
     { id: 'full', src: '/fullsuit_result.webp', ...t('suit.images')[0] },
     { id: 'chest', src: '/chest_result.webp', ...t('suit.images')[1] },
     { id: 'shoulder', src: '/shoulder_result.webp', ...t('suit.images')[2] },
-    { id: 'cap', src: '/cap_result.webp', ...t('suit.images')[3] }
+    { id: 'cap', src: '/ccap1_result.webp', ...t('suit.images')[3] }
   ];
 
   // حالة لتتبع الصورة المعروضة حالياً (تبدأ بالصورة الكاملة)
   const [activeImage, setActiveImage] = useState(images[0]);
 
   return (
-    <main dir={dir} className="bg-[#f8fafc] font-cairo selection:bg-[#0f172a] selection:text-white min-h-screen pb-20 md:pb-24">
+    <main dir={dir} className="bg-[#f8fafc] font-cairo selection:bg-[#0f172a] selection:text-white min-h-[100svh] pb-20 md:pb-24">
       
       {/* 
         رأس الصفحة الغامق (Dark Header) 

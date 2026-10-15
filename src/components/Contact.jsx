@@ -48,7 +48,7 @@ export default function Contact() {
     <section 
       id="contact" 
       ref={sectionRef} 
-      className="relative w-full min-h-screen flex items-center font-cairo overflow-hidden pt-20 pb-20"
+      className="relative w-full min-h-[100svh] flex items-center font-cairo overflow-hidden pt-24 pb-20 sm:pt-20 sm:pb-20"
       dir={dir}
     >
       {/* 1. صورة الخلفية (مبنى زجاجي ضخم يعكس فخامة المنشآت التي يتم حمايتها) */}
@@ -69,11 +69,11 @@ export default function Contact() {
         
         {/* 2. القسم الأيمن: النصوص (حسب التصميم المرجعي) */}
         <div ref={textRef} className="w-full lg:w-5/12 text-white">
-          <h2 className="text-5xl md:text-6xl lg:text-7xl font-black mb-6 leading-tight tracking-tight drop-shadow-xl">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black mb-6 leading-tight tracking-tight drop-shadow-xl">
             {t('contactSection.titleA')} <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-l from-amber-400 to-amber-600">{t('contactSection.titleB')}</span>
           </h2>
-          <p className="text-lg md:text-xl text-white/90 font-medium leading-relaxed drop-shadow-md">
+          <p className="text-base sm:text-lg md:text-xl text-white/90 font-medium leading-relaxed drop-shadow-md">
             {t('contactSection.lead')}
           </p>
         </div>
@@ -93,7 +93,7 @@ export default function Contact() {
                 <input 
                   type="text" 
                   placeholder={t('contactSection.namePlaceholder')}
-                  className="w-full bg-transparent border border-slate-200 rounded-xl px-4 py-3.5 text-slate-900 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all placeholder:text-slate-400 text-sm"
+                  className="w-full bg-transparent border border-slate-200 rounded-xl px-4 py-3.5 text-slate-900 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all placeholder:text-slate-400 text-base md:text-sm"
                 />
               </div>
 
@@ -103,7 +103,7 @@ export default function Contact() {
                 <input 
                   type="text" 
                   placeholder={t('contactSection.contactPlaceholder')}
-                  className="w-full bg-transparent border border-slate-200 rounded-xl px-4 py-3.5 text-slate-900 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all placeholder:text-slate-400 text-sm text-start"
+                  className="w-full bg-transparent border border-slate-200 rounded-xl px-4 py-3.5 text-slate-900 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all placeholder:text-slate-400 text-base md:text-sm text-start"
                 />
               </div>
 
@@ -113,7 +113,7 @@ export default function Contact() {
                 <textarea 
                   rows="4"
                   placeholder={t('contactSection.detailsPlaceholder')}
-                  className="w-full bg-transparent border border-slate-200 rounded-xl px-4 py-3.5 text-slate-900 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all placeholder:text-slate-400 text-sm resize-none"
+                  className="w-full bg-transparent border border-slate-200 rounded-xl px-4 py-3.5 text-slate-900 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all placeholder:text-slate-400 text-base md:text-sm resize-none"
                 ></textarea>
               </div>
 

@@ -74,7 +74,7 @@ export default function Footer() {
               </div>
               <div>
                 <h3 className="text-xl font-black text-white leading-none mb-1">{t('footer.brand')}</h3>
-                <p className="text-[10px] text-amber-500 tracking-[0.2em] uppercase font-bold">{t('footer.brandLatin')}</p>
+                <p className="text-xs text-amber-500 tracking-[0.2em] uppercase font-bold">{t('footer.brandLatin')}</p>
               </div>
             </div>
             <p className="text-slate-400 text-sm leading-relaxed mb-6 font-medium">
@@ -99,13 +99,13 @@ export default function Footer() {
               
               <div className="flex items-center justify-start gap-2 text-amber-400">
                 <Phone className="w-4 h-4" />
-                <a href="tel:0795602030" className="hover:text-white transition-colors text-sm font-mono tracking-wider font-bold" dir="ltr">
+                <a href="tel:0795602030" className="inline-flex items-center min-h-11 hover:text-white transition-colors text-sm font-mono tracking-wider font-bold" dir="ltr">
                   079 560 2030
                 </a>
               </div>
             </div>
 
-            <a href="mailto:gm@vigilance4security.com" className="flex items-center gap-3 text-slate-300 hover:text-amber-400 transition-colors text-sm group mt-2">
+            <a href="mailto:gm@vigilance4security.com" className="flex items-center gap-3 min-h-11 text-slate-300 hover:text-amber-400 transition-colors text-sm group mt-2">
               <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-amber-500/10 shrink-0">
                 <Mail className="w-4 h-4" />
               </div>
@@ -124,7 +124,7 @@ export default function Footer() {
               <p className="text-slate-400 text-xs mb-2">{t('footer.directLine')}</p>
               
               <div className="flex justify-start mb-2">
-                <a href="tel:+962772050091" className="text-xl font-bold text-white hover:text-amber-400 transition-colors font-mono tracking-wider" dir="ltr">
+                <a href="tel:+962772050091" className="inline-flex items-center min-h-11 text-xl font-bold text-white hover:text-amber-400 transition-colors font-mono tracking-wider" dir="ltr">
                   +962 7 7205 0091
                 </a>
               </div>
@@ -134,17 +134,17 @@ export default function Footer() {
               </span>
             </div>
 
-            <a href="mailto:Operation@vigilance4security.com" className="flex items-center gap-3 text-slate-300 hover:text-amber-400 transition-colors text-sm group">
+            <a href="mailto:Operation@vigilance4security.com" className="flex items-center gap-3 min-h-11 text-slate-300 hover:text-amber-400 transition-colors text-sm group">
               <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-amber-500/10 shrink-0">
                 <Mail className="w-4 h-4" />
               </div>
               <div className="flex flex-col min-w-0">
-                <span className="text-[10px] text-slate-500 font-bold mb-0.5">{t('footer.opsDep')}</span>
+                <span className="text-xs text-slate-500 font-bold mb-0.5">{t('footer.opsDep')}</span>
                 <span className="font-mono text-xs break-all" dir="ltr">Operation@vigilance4security.com</span>
               </div>
             </a>
             
-            <a href="mailto:Info@vigilance4security.com" className="flex items-center gap-3 text-slate-300 hover:text-amber-400 transition-colors text-sm group mt-3">
+            <a href="mailto:Info@vigilance4security.com" className="flex items-center gap-3 min-h-11 text-slate-300 hover:text-amber-400 transition-colors text-sm group mt-3">
               <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-amber-500/10 shrink-0">
                 <Mail className="w-4 h-4" />
               </div>
@@ -182,7 +182,7 @@ export default function Footer() {
                   <li key={link.to}>
                     <Link
                       to={link.to}
-                      className="text-slate-400 hover:text-amber-400 transition-colors text-sm flex items-center gap-2 group w-fit"
+                      className="min-h-11 text-slate-400 hover:text-amber-400 transition-colors text-sm flex items-center gap-2 group w-fit"
                     >
                       <Chevron className={`w-4 h-4 ${chevronHover} transition-transform`} /> {link.label}
                     </Link>
@@ -195,7 +195,7 @@ export default function Footer() {
         </div>
 
         {/* 3. شريط حقوق النشر */}
-        <div className="py-6 flex flex-col md:flex-row items-center justify-between text-xs font-semibold text-slate-500 uppercase tracking-widest relative z-20">
+        <div className="pt-6 pb-[max(1.5rem,env(safe-area-inset-bottom))] flex flex-col md:flex-row items-center justify-between text-xs font-semibold text-slate-500 uppercase tracking-widest relative z-20">
           <p>{t('footer.copyright')}</p>
         </div>
       </div>

@@ -155,7 +155,7 @@ export default function AboutPage() {
 
   return (
     <div ref={rootRef} dir={dir} className="font-cairo bg-[#050d1a] text-white overflow-x-clip">
-      <section className="ab-hero v4s-noise relative h-screen w-full overflow-hidden bg-[#0a192f]">
+      <section className="ab-hero v4s-noise relative min-h-[100svh] w-full overflow-hidden bg-[#0a192f]">
         <div className="absolute inset-0 h-[120%] -top-[10%]">
           <div className="ab-hero-media h-full w-full">
             <video
@@ -177,25 +177,25 @@ export default function AboutPage() {
           </div>
         </div>
 
-        <div className="ab-hero-copy relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full h-full flex flex-col justify-end pb-28 md:pb-32">
-          <div className="flex flex-wrap w-16 gap-1.5 mb-8 opacity-60">
+        <div className="ab-hero-copy relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full min-h-[100svh] flex flex-col justify-end pt-32 pb-24 md:pb-32">
+          <div className="flex flex-wrap w-16 gap-1.5 mb-6 md:mb-8 opacity-60">
             {[...Array(15)].map((_, i) => (
               <div key={i} className="w-1 h-1 bg-white rounded-full" />
             ))}
           </div>
-          <p className="text-amber-400 text-xs font-bold tracking-[0.25em] uppercase mb-5">
+          <p className="text-amber-400 text-xs font-bold tracking-[0.25em] uppercase mb-4 md:mb-5">
             {aboutHero.kicker}
           </p>
-          <h1 className="text-4xl md:text-6xl lg:text-[5rem] font-black leading-[1.1] tracking-tight drop-shadow-xl uppercase max-w-4xl">
+          <h1 className="text-[1.9rem] sm:text-4xl md:text-6xl lg:text-[5rem] font-black leading-[1.15] md:leading-[1.1] tracking-tight drop-shadow-xl uppercase max-w-4xl">
             {aboutHero.title} <span className="text-amber-400">{aboutHero.titleAccent}</span>
           </h1>
-          <p className="mt-7 text-base md:text-lg text-slate-300 max-w-2xl leading-relaxed font-medium">
+          <p className="mt-5 md:mt-7 text-sm sm:text-base md:text-lg text-slate-300 max-w-2xl leading-relaxed font-medium">
             {aboutHero.lead}
           </p>
-          <p className="mt-6 text-lg md:text-2xl font-bold text-amber-400 max-w-2xl leading-snug">
+          <p className="mt-4 md:mt-6 text-base sm:text-lg md:text-2xl font-bold text-amber-400 max-w-2xl leading-snug">
             {aboutHero.tagline}
           </p>
-          <a href="#journey" className="group mt-10 inline-flex items-center gap-2 w-fit text-white font-bold text-lg border-b border-white/40 pb-1 hover:border-amber-400 hover:text-amber-400 transition-all">
+          <a href="#journey" className="group mt-8 md:mt-10 inline-flex items-center gap-2 min-h-11 py-2 w-fit text-white font-bold text-base md:text-lg border-b border-white/40 hover:border-amber-400 hover:text-amber-400 transition-all">
             {t('aboutPage.journey')}
             <ChevronRight className={`w-5 h-5 transition-transform ${dir === 'ltr' ? 'group-hover:translate-x-2' : 'rotate-180 group-hover:-translate-x-2'}`} />
           </a>
@@ -304,7 +304,7 @@ export default function AboutPage() {
 
       <section className="relative overflow-hidden bg-[#0a1526] py-24 md:py-28">
         <div className="ab-panel relative h-[220vh]">
-          <div className="ab-panel-img sticky top-0 h-screen w-full">
+          <div className="ab-panel-img sticky top-0 h-[100svh] w-full">
             <img
               src="/Security Escort_result.webp"
               alt={t('aboutPage.altEscort')}
@@ -314,7 +314,7 @@ export default function AboutPage() {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#0a1526] via-[#0a1526]/60 to-[#0a1526]/30" />
           </div>
-          <div className="ab-panel-copy sticky top-0 h-screen w-full flex items-center justify-center px-4 -mt-screen">
+          <div className="ab-panel-copy sticky top-0 h-[100svh] w-full flex items-center justify-center px-4 -mt-[100svh]">
             <div className="text-center max-w-3xl">
               <p className="text-amber-400 text-xs font-bold tracking-[0.25em] uppercase mb-6">{t('aboutPage.summaryKicker')}</p>
               <h2 className="text-3xl md:text-5xl lg:text-6xl font-black text-white leading-tight drop-shadow-2xl">

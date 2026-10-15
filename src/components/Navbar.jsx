@@ -26,7 +26,7 @@ function LangToggle() {
           type="button"
           onClick={() => setLang(opt.code)}
           aria-pressed={lang === opt.code}
-          className={`px-3 h-9 text-xs font-bold tracking-wider transition-colors ${
+          className={`min-w-11 h-11 lg:min-w-0 lg:h-9 px-3 text-xs font-bold tracking-wider transition-colors sm:px-3.5 ${
             lang === opt.code
               ? 'bg-amber-500 text-[#0a192f]'
               : 'text-white/60 hover:text-white'
@@ -75,7 +75,7 @@ export default function Navbar() {
 
   return (
     <header 
-      className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-500 font-cairo ${
+      className={`safe-top safe-inline fixed top-0 left-0 right-0 z-50 w-full transition-all duration-500 font-cairo ${
         isScrolled
           ? 'bg-[#0a192f]/95 backdrop-blur-md shadow-xl border-b border-white/5' 
           : 'bg-transparent'
@@ -118,9 +118,8 @@ export default function Navbar() {
         {/* الأزرار: الهاتف + اللغة + طلب عرض سعر */}
         <div className="flex items-center gap-3 md:gap-4">
           <a
-            href="tel:+962772050091"
             aria-label={t('nav.call')}
-            className="hidden sm:inline-flex w-10 h-10 items-center justify-center rounded-full border border-white/15 text-white/80 hover:text-amber-400 hover:border-amber-400/60 transition-colors"
+            className="hidden sm:inline-flex w-11 h-11 items-center justify-center rounded-full border border-white/15 text-white/80 hover:text-amber-400 hover:border-amber-400/60 transition-colors"
           >
             <Phone className="w-4 h-4" />
           </a>
@@ -129,7 +128,7 @@ export default function Navbar() {
 
           <Link
             to="/contact"
-            className="hidden md:inline-flex items-center justify-center px-6 py-3 text-sm font-bold text-[#0a192f] bg-amber-500 hover:bg-white transition-colors rounded-sm shadow-lg shadow-amber-500/10"
+            className="hidden md:inline-flex min-h-11 items-center justify-center px-6 py-3 text-sm font-bold text-[#0a192f] bg-amber-500 hover:bg-white transition-colors rounded-sm shadow-lg shadow-amber-500/10"
           >
             {t('nav.quote')}
           </Link>
@@ -139,7 +138,7 @@ export default function Navbar() {
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label={t('nav.menu')}
             aria-expanded={isMobileMenuOpen}
-            className="lg:hidden p-2 text-white hover:text-amber-400 transition-colors"
+            className="lg:hidden inline-flex h-11 w-11 -me-2 items-center justify-center text-white hover:text-amber-400 transition-colors"
           >
             {isMobileMenuOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
           </button>
@@ -147,10 +146,10 @@ export default function Navbar() {
       </nav>
 
       {/* 3. قائمة الموبايل (Mobile Menu) */}
-      <div className={`lg:hidden absolute top-full left-0 w-full bg-[#0a192f]/95 backdrop-blur-xl border-b border-white/10 transition-all duration-300 overflow-hidden ${
-        isMobileMenuOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
+      <div className={`lg:hidden absolute top-full left-0 w-full bg-[#0a192f]/95 backdrop-blur-xl border-b border-white/10 transition-all duration-300 overflow-y-auto overscroll-contain ${
+        isMobileMenuOpen ? 'max-h-[calc(100svh-4rem)] opacity-100' : 'max-h-0 opacity-0'
       }`}>
-        <div className="flex flex-col px-4 py-6 gap-2">
+        <div className="safe-bottom flex flex-col px-4 py-6 gap-2">
           {navLinks.map((link) => (
             <Link
               key={link.to}

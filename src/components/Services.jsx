@@ -116,13 +116,13 @@ export default function Services() {
         <div 
           ref={sliderRef}
           onScroll={handleScroll}
-          className="flex gap-4 md:gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-8"
+          className="flex gap-4 md:gap-6 overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-8 scroll-px-4 md:scroll-px-12 lg:scroll-px-24"
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
           {sectors.map((sector) => (
             <div 
               key={sector.title} 
-              className="sector-card shrink-0 w-[280px] md:w-[340px] h-[400px] md:h-[500px] snap-center relative rounded-sm overflow-hidden group cursor-pointer"
+              className="sector-card shrink-0 w-[78vw] max-w-[300px] md:w-[340px] h-[400px] md:h-[500px] snap-center relative rounded-sm overflow-hidden group cursor-pointer"
             >
               <img 
                 src={sector.image} 

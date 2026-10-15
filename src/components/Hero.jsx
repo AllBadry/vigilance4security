@@ -49,7 +49,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section ref={containerRef} dir={dir} className="relative h-screen w-full overflow-hidden bg-[#0a192f] font-cairo">
+    <section ref={containerRef} dir={dir} className="relative min-h-[100svh] w-full overflow-hidden bg-[#0a192f] font-cairo">
       
       {/* 1. الخلفية */}
       <div ref={bgRef} className="absolute inset-0 z-0 h-[120%] -top-[10%]">
@@ -78,7 +78,7 @@ export default function Hero() {
       </div>
 
       {/* 2. المحتوى الرئيسي (النصوص والترقيم) */}
-      <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full h-full flex items-center justify-between pt-24">
+      <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full min-h-[100svh] flex items-center justify-between pt-28 pb-20 sm:pt-24 sm:pb-16">
         
         {/* القسم الأول: النصوص */}
         <div ref={contentRef} className="w-full md:w-[65%]">
@@ -90,16 +90,16 @@ export default function Hero() {
              ))}
           </div>
 
-          <h1 className="text-4xl md:text-5xl lg:text-[3.5rem] font-black text-white leading-[1.2] mb-6 tracking-tight drop-shadow-xl uppercase">
+          <h1 className="text-[1.75rem] leading-[1.25] sm:text-4xl md:text-5xl lg:text-[3.5rem] font-black text-white md:leading-[1.2] mb-5 md:mb-6 tracking-tight drop-shadow-xl uppercase">
             {t('hero.title1')} <br />
             {t('hero.title2')} <span className="text-amber-400">{t('hero.titleAccent')}</span>
           </h1>
-          
-          <p className="text-base md:text-lg text-slate-300 max-w-xl mb-10 leading-relaxed font-medium">
+
+          <p className="text-sm sm:text-base md:text-lg text-slate-300 max-w-xl leading-relaxed font-medium mb-7 md:mb-6">
             {t('hero.lead')}
           </p>
 
-          <Link to="/about" className="group inline-flex items-center gap-2 text-white font-bold text-lg border-b border-white/40 pb-1 hover:border-amber-400 hover:text-amber-400 transition-all">
+          <Link to="/about" className="group inline-flex items-center gap-2 min-h-11 py-2 text-white font-bold text-base md:text-lg border-b border-white/40 hover:border-amber-400 hover:text-amber-400 transition-all w-fit">
             {t('hero.cta')}
             <Chevron className={`w-5 h-5 ${chevronHover} transition-transform`} />
           </Link>

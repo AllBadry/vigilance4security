@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Phone, Mail, Send, Shield, Building, CheckCircle2 } from 'lucide-react';
+import { Phone, Mail, Send, Shield, Building, CheckCircle2, ChevronDown } from 'lucide-react';
 import { useLang } from '../i18n/useLang';
 
 export default function Contact() {
@@ -14,7 +14,7 @@ export default function Contact() {
   };
 
   return (
-    <main dir={dir} className="bg-[#f8fafc] font-cairo selection:bg-[#0a1526] selection:text-white min-h-screen">
+    <main dir={dir} className="bg-[#f8fafc] font-cairo selection:bg-[#0a1526] selection:text-white min-h-[100svh]">
       
       {/* رأس الصفحة الغامق (Dark Header) لدعم الناف بار الشفاف */}
       <div className="bg-[#0a1526] pt-32 pb-24 md:pt-40 md:pb-32 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
@@ -63,11 +63,11 @@ export default function Contact() {
               </div>
               <h3 className="text-xl font-bold text-[#0a1526] mb-4">{t('contactPage.phonesTitle')}</h3>
               <div className="space-y-4">
-                <a href="tel:+962795602030" className="flex items-center gap-3 text-slate-600 hover:text-[#0a1526] font-medium transition-colors w-fit">
+                <a href="tel:+962795602030" className="flex items-center gap-3 min-h-11 text-slate-600 hover:text-[#0a1526] font-medium transition-colors w-fit">
                   <span className="text-lg" dir="ltr">079 560 2030</span>
                   <span className="text-sm bg-slate-100 px-2 py-1 rounded text-slate-500">{t('contactPage.labelAdmin')}</span>
                 </a>
-                <a href="tel:+962772050091" className="flex items-center gap-3 text-slate-600 hover:text-[#0a1526] font-medium transition-colors w-fit">
+                <a href="tel:+962772050091" className="flex items-center gap-3 text-slate-600 hover:text-[#0a1526] font-medium transition-colors w-fit min-h-11">
                   <span className="text-lg" dir="ltr">077 205 0091</span>
                   <span className="text-sm bg-slate-100 px-2 py-1 rounded text-slate-500">{t('contactPage.labelOps')}</span>
                 </a>
@@ -81,13 +81,13 @@ export default function Contact() {
               </div>
               <h3 className="text-xl font-bold mb-4">{t('contactPage.emailTitle')}</h3>
               <div className="space-y-3">
-                <a href="mailto:Info@vigilance4security.com" className="block text-slate-300 hover:text-white transition-colors">
+                <a href="mailto:Info@vigilance4security.com" className="inline-flex items-center min-h-11 text-slate-300 hover:text-white transition-colors">
                   Info@vigilance4security.com
                 </a>
-                <a href="mailto:Operation@vigilance4security.com" className="block text-slate-300 hover:text-white transition-colors">
+                <a href="mailto:Operation@vigilance4security.com" className="inline-flex items-center min-h-11 text-slate-300 hover:text-white transition-colors">
                   Operation@vigilance4security.com
                 </a>
-                <a href="mailto:gm@vigilance4security.com" className="block text-slate-300 hover:text-white transition-colors">
+                <a href="mailto:gm@vigilance4security.com" className="inline-flex items-center min-h-11 text-slate-300 hover:text-white transition-colors">
                   gm@vigilance4security.com
                 </a>
               </div>
@@ -163,19 +163,22 @@ export default function Contact() {
                 {/* نوع الخدمة */}
                 <div>
                   <label htmlFor="service" className="block text-sm font-bold text-[#0a1526] mb-2">{t('contactPage.serviceLabel')}</label>
-                  <select 
-                    id="service" 
-                    required
-                    className="w-full bg-slate-50 border border-slate-200 text-slate-900 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#0a1526] focus:border-transparent transition-all appearance-none"
-                  >
-                    <option value="">{t('contactPage.servicePlaceholder')}</option>
-                    <option value="facilities">{t('contactPage.serviceOptions')[0]}</option>
-                    <option value="escort">{t('contactPage.serviceOptions')[1]}</option>
-                    <option value="events">{t('contactPage.serviceOptions')[2]}</option>
-                    <option value="cash">{t('contactPage.serviceOptions')[3]}</option>
-                    <option value="consulting">{t('contactPage.serviceOptions')[4]}</option>
-                    <option value="other">{t('contactPage.serviceOptions')[5]}</option>
-                  </select>
+                  <div className="relative">
+                    <select 
+                      id="service" 
+                      required
+                      className="w-full bg-slate-50 border border-slate-200 text-slate-900 rounded-lg ps-4 pe-11 py-3 focus:outline-none focus:ring-2 focus:ring-[#0a1526] focus:border-transparent transition-all appearance-none"
+                    >
+                      <option value="">{t('contactPage.servicePlaceholder')}</option>
+                      <option value="facilities">{t('contactPage.serviceOptions')[0]}</option>
+                      <option value="escort">{t('contactPage.serviceOptions')[1]}</option>
+                      <option value="events">{t('contactPage.serviceOptions')[2]}</option>
+                      <option value="cash">{t('contactPage.serviceOptions')[3]}</option>
+                      <option value="consulting">{t('contactPage.serviceOptions')[4]}</option>
+                      <option value="other">{t('contactPage.serviceOptions')[5]}</option>
+                    </select>
+                    <ChevronDown className="pointer-events-none absolute top-1/2 -translate-y-1/2 end-4 w-5 h-5 text-slate-400" />
+                  </div>
                 </div>
 
                 {/* الرسالة */}
