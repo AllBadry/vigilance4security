@@ -1,7 +1,9 @@
 import { useEffect, useRef } from 'react';
+import { Link } from 'react-router';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ChevronLeft } from 'lucide-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { useLang } from '../i18n/useLang';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -10,6 +12,10 @@ export default function Hero() {
   const bgRef = useRef(null);
   const contentRef = useRef(null);
   const paginationRef = useRef(null);
+  const { t, dir } = useLang();
+
+  const Chevron = dir === 'ltr' ? ChevronRight : ChevronLeft;
+  const chevronHover = dir === 'ltr' ? 'group-hover:translate-x-2' : 'group-hover:-translate-x-2';
 
   useEffect(() => {
     let ctx = gsap.context(() => {
@@ -43,12 +49,12 @@ export default function Hero() {
   }, []);
 
   return (
-    <section ref={containerRef} className="relative h-screen w-full overflow-hidden bg-[#0a192f] font-cairo" dir="rtl">
+    <section ref={containerRef} dir={dir} className="relative h-screen w-full overflow-hidden bg-[#0a192f] font-cairo">
       
       {/* 1. الخلفية */}
       <div ref={bgRef} className="absolute inset-0 z-0 h-[120%] -top-[10%]">
          <video 
-          src="./gemini_generated_video_3765d11c.mp4" 
+          src="/gemini_generated_video_3765d11c.mp4" 
           autoPlay="true"
           muted="true"
           repeat="true"
@@ -56,7 +62,7 @@ export default function Hero() {
           replay="true"
           loop="true"
           playsInline
-          alt="مبنى مؤسسي حديث" 
+          aria-label={t('hero.altVideo')}
           className="w-full h-full object-cover scale-105"
         />
         {/* تدرج لوني أزرق/كحلي عميق لدمج النصوص */}
@@ -72,10 +78,9 @@ export default function Hero() {
       </div>
 
       {/* 2. المحتوى الرئيسي (النصوص والترقيم) */}
-      {/* أضفنا pt-24 لدفع المحتوى أسفل الناف بار ليتمركز بشكل مثالي */}
       <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full h-full flex items-center justify-between pt-24">
         
-        {/* القسم الأيمن: النصوص */}
+        {/* القسم الأول: النصوص */}
         <div ref={contentRef} className="w-full md:w-[65%]">
           
           {/* شبكة النقاط الزخرفية (Dot Pattern) */}
@@ -86,40 +91,40 @@ export default function Hero() {
           </div>
 
           <h1 className="text-4xl md:text-5xl lg:text-[3.5rem] font-black text-white leading-[1.2] mb-6 tracking-tight drop-shadow-xl uppercase">
-            بصفتنا مجموعة اليقظة، <br />
-            نضيف قيمة لأمن <span className="text-amber-400">الوطن.</span>
+            {t('hero.title1')} <br />
+            {t('hero.title2')} <span className="text-amber-400">{t('hero.titleAccent')}</span>
           </h1>
           
           <p className="text-base md:text-lg text-slate-300 max-w-xl mb-10 leading-relaxed font-medium">
-            بدأت قصة اليقظة كقصة استثمارية لحماية الأرواح والممتلكات. بصفتنا القوة المتنامية في قطاع الخدمات الأمنية واللوجستية، سنستمر في إضافة قيمة للمنطقة والعالم.
+            {t('hero.lead')}
           </p>
 
-          <a href="/about" className="group inline-flex items-center gap-2 text-white font-bold text-lg border-b border-white/40 pb-1 hover:border-amber-400 hover:text-amber-400 transition-all">
-            عن اليقظة 
-            <ChevronLeft className="w-5 h-5 group-hover:-translate-x-2 transition-transform" />
-          </a>
+          <Link to="/about" className="group inline-flex items-center gap-2 text-white font-bold text-lg border-b border-white/40 pb-1 hover:border-amber-400 hover:text-amber-400 transition-all">
+            {t('hero.cta')}
+            <Chevron className={`w-5 h-5 ${chevronHover} transition-transform`} />
+          </Link>
         </div>
 
-        {/* القسم الأيسر: مؤشر الصفحات (Pagination) */}
-        <div ref={paginationRef} className="hidden md:flex flex-col items-end gap-6 relative pr-8">
+        {/* القسم الثاني: مؤشر الصفحات (Pagination) */}
+        <div ref={paginationRef} className="hidden md:flex flex-col items-end gap-6 relative ps-8">
           {/* الخط العمودي الرئيسي */}
-          <div className="absolute top-0 bottom-0 right-0 w-[1px] bg-white/20"></div>
+          <div className="absolute top-0 bottom-0 start-0 w-[1px] bg-white/20"></div>
           
           {/* رقم 01 (النشط) */}
           <div className="relative flex items-center justify-end w-full cursor-pointer group">
             {/* خط التحديد بجانب الرقم النشط */}
-            <div className="absolute -right-[2px] w-[3px] h-full bg-white"></div>
-            <span className="text-5xl font-black text-white leading-none pr-6">01</span>
+            <div className="absolute -start-[2px] w-[3px] h-full bg-white"></div>
+            <span className="text-5xl font-black text-white leading-none ps-6">01</span>
           </div>
 
           {/* رقم 02 */}
           <div className="relative flex items-center justify-end w-full cursor-pointer group hover:opacity-100 opacity-50 transition-opacity">
-            <span className="text-2xl font-bold text-white pr-6">02</span>
+            <span className="text-2xl font-bold text-white ps-6">02</span>
           </div>
 
           {/* رقم 03 */}
           <div className="relative flex items-center justify-end w-full cursor-pointer group hover:opacity-100 opacity-50 transition-opacity">
-            <span className="text-2xl font-bold text-white pr-6">03</span>
+            <span className="text-2xl font-bold text-white ps-6">03</span>
           </div>
         </div>
 

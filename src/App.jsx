@@ -5,18 +5,31 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import Seo from './components/Seo';
 import Home from './pages/Home';
 import AboutPage from './pages/AboutPage';
+import Suit from './pages/suit';
+import ContactPage from './pages/Contact';
 
 gsap.registerPlugin(ScrollTrigger);
 
 function ScrollToTop() {
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
 
   useEffect(() => {
     window.scrollTo(0, 0);
     ScrollTrigger.refresh();
-  }, [pathname]);
+
+    // إن كان هناك مرساة (مثل /#services) انتقل إليها بعد تثبيت المسار الجديد
+    if (hash) {
+      const id = decodeURIComponent(hash.slice(1));
+      const t = setTimeout(() => {
+        const el = document.getElementById(id);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 80);
+      return () => clearTimeout(t);
+    }
+  }, [pathname, hash]);
 
   return null;
 }
@@ -47,9 +60,12 @@ export default function App() {
     <>
       <Navbar />
       <ScrollToTop />
+      <Seo />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<AboutPage />} />
+        <Route path="/suit" element={<Suit />} />
+        <Route path="/contact" element={<ContactPage />} />
         <Route path="*" element={<Home />} />
       </Routes>
       <Footer />

@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Shield, Award, GraduationCap, HeartPulse, Shirt, Building2, Car, Briefcase, Lock, ShieldAlert, Globe, BriefcaseBusiness } from 'lucide-react';
-import { pillars as tabsData, staff, uniform, services } from '../data/about';
+import { Shield, Award, GraduationCap, HeartPulse, Shirt } from 'lucide-react';
+import { useLang } from '../i18n/useLang';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -14,27 +15,32 @@ export default function About() {
   const contentRef = useRef(null);
   const btnRef = useRef(null);
   const [activeTab, setActiveTab] = useState(0);
+  const { t, dir, content } = useLang();
+
+  const { pillars: tabsData, staff, uniform } = content;
 
   const staffIcons = [Shield, GraduationCap, Award, HeartPulse];
-  const serviceIcons = [Building2, Car, BriefcaseBusiness, Lock, ShieldAlert, Globe];
 
-  useEffect(() => {
+ useEffect(() => {
     let ctx = gsap.context(() => {
       
-      // 1. دخول العنوان (بانسيابية من الأسفل)
-      gsap.from(headerRef.current.children, {
-        y: 40,
-        opacity: 0,
-        duration: 1,
-        stagger: 0.2,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 75%",
+      // 1. دخول العنوان
+      gsap.fromTo(headerRef.current.children, 
+        { y: 40, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          stagger: 0.2,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 75%",
+          }
         }
-      });
+      );
 
-      // 2. دخول النص العملاق (ضبابي ويصبح واضحاً مع التصغير)
+      // 2. دخول النص العملاق
       gsap.fromTo(textMaskRef.current,
         { opacity: 0, scale: 1.1, filter: "blur(20px)", y: 50 },
         {
@@ -51,79 +57,87 @@ export default function About() {
         }
       );
 
-      // 3. تأثير البارالاكس المستمر (Scrub) للصورة داخل الحروف
+      // 3. تأثير البارالاكس المستمر (Scrub) للصورة
       gsap.to(textMaskRef.current, {
-        backgroundPosition: "50% 100%", // تحريك الصورة للأسفل
+        backgroundPosition: "50% 100%",
         ease: "none",
         scrollTrigger: {
           trigger: textMaskRef.current,
           start: "top bottom",
           end: "bottom top",
-          scrub: 1.5, // نعومة التمرير
+          scrub: 1.5,
         }
       });
 
-      // 4. دخول التبويبات (تأثير ارتدادي Spring)
-      gsap.from(tabsRef.current.children, {
-        y: 40,
-        opacity: 0,
-        scale: 0.8,
-        duration: 0.8,
-        stagger: 0.1,
-        ease: "back.out(1.5)",
-        scrollTrigger: {
-          trigger: tabsRef.current,
-          start: "top 85%",
+      // 4. دخول التبويبات (تم التعديل هنا لتجنب اختفائها)
+      gsap.fromTo(tabsRef.current.children, 
+        { y: 40, opacity: 0, scale: 0.8 },
+        {
+          y: 0,
+          opacity: 1,
+          scale: 1,
+          duration: 0.8,
+          stagger: 0.1,
+          ease: "back.out(1.5)",
+          scrollTrigger: {
+            trigger: tabsRef.current,
+            start: "top 85%",
+          }
         }
-      });
+      );
 
       // 5. دخول الزر السفلي
-      gsap.from(btnRef.current, {
-        y: 30,
-        opacity: 0,
-        duration: 1,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: btnRef.current,
-          start: "top 95%",
+      gsap.fromTo(btnRef.current, 
+        { y: 30, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: btnRef.current,
+            start: "top 95%",
+          }
         }
-      });
+      );
 
     }, sectionRef);
 
     return () => ctx.revert();
   }, []);
 
+    
   // أنيميشن تغيير المحتوى عند النقر
   useEffect(() => {
-    gsap.fromTo(contentRef.current,
-      { y: 20, opacity: 0, scale: 0.98 },
-      { y: 0, opacity: 1, scale: 1, duration: 0.5, ease: "power2.out" }
-    );
-  }, [activeTab]);
+    let ctx = gsap.context(() => {
+      gsap.fromTo(contentRef.current,
+        { y: 15, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.4, ease: "power2.out", overwrite: true }
+      );
+    });
+    return () => ctx.revert();
+  }, [activeTab, dir]);
 
   return (
-    <section ref={sectionRef} className="py-24 md:py-32 bg-white font-cairo overflow-hidden">
+    <section ref={sectionRef} dir={dir} className="py-24 md:py-32 bg-white font-cairo overflow-hidden">
       <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
         
         {/* العنوان العلوي */}
         <div ref={headerRef} className="text-center mb-10 md:mb-12">
-          <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-4">
-            عن مجموعة اليقظة
-          </h2>
+          <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-4">{t('about.title')}</h2>
           <p className="text-slate-500 text-sm md:text-base font-medium max-w-2xl mx-auto">
-            مجموعة اليقظة للأمن والحماية تقدم حلولاً أمنية مبتكرة ومستدامة لضمان سلامة استثماراتك.
+            {t('about.lead')}
           </p>
         </div>
 
-        {/* النص العملاق مع صورة متحركة بداخله */}
+        {/* النص العملاق مع صورة داخلية (Wordmark) */}
         <div className="w-full flex justify-center mb-16 md:mb-20 overflow-hidden relative">
-          <h1 
+          <h1
             ref={textMaskRef}
             className="text-[18vw] md:text-[16vw] font-black uppercase leading-none tracking-tighter text-center select-none"
             style={{
               backgroundImage: 'url("https://images.pexels.com/photos/830891/pexels-photo-830891.jpeg?auto=compress&cs=tinysrgb&w=2000")',
-              backgroundPosition: '50% 0%', // تبدأ من الأعلى
+              backgroundPosition: '50% 0%',
               backgroundSize: 'cover',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
@@ -135,13 +149,13 @@ export default function About() {
           </h1>
         </div>
 
-        {/* شريط التبويبات */}
-        <div ref={tabsRef} className="flex flex-wrap items-center justify-center gap-2 md:gap-4 mb-12 max-w-4xl w-full">
+        {/* شريط التبويبات المتناسق */}
+        <div ref={tabsRef} className="flex flex-wrap items-center justify-center gap-3 md:gap-5 mb-12 w-full px-4">
           {tabsData.map((tab, index) => (
             <button
-              key={index}
+              key={tab.title}
               onClick={() => setActiveTab(index)}
-              className={`px-6 py-3 text-sm md:text-base font-bold rounded-sm transition-all duration-300 border ${
+              className={`px-6 py-3 text-sm md:text-base font-bold rounded-sm transition-all duration-300 border whitespace-nowrap flex-shrink-0 ${
                 activeTab === index 
                   ? 'bg-[#0a1526] text-white border-[#0a1526] shadow-lg' 
                   : 'bg-white text-slate-600 border-slate-200 hover:border-slate-400 hover:text-slate-900' 
@@ -152,10 +166,14 @@ export default function About() {
           ))}
         </div>
 
-        {/* محتوى التبويب */}
-        <div className="max-w-3xl w-full text-center mb-12 min-h-[100px] flex items-center justify-center">
-          <p ref={contentRef} className="text-slate-600 text-base md:text-lg leading-relaxed font-medium">
-            {tabsData[activeTab].desc}
+        {/* محتوى التبويب (مع key لإجبار التحديث) */}
+        <div className="max-w-3xl w-full text-center mb-12 min-h-[100px] flex items-center justify-center px-4">
+          <p 
+            key={`${activeTab}-${dir}`} // هذا السطر هو الحل الجذري لاختفاء النص
+            ref={contentRef} 
+            className="text-slate-600 text-base md:text-lg leading-relaxed font-medium"
+          >
+            {tabsData[activeTab]?.desc}
           </p>
         </div>
 
@@ -165,7 +183,7 @@ export default function About() {
             href="#services" 
             className="inline-flex items-center justify-center px-10 py-3.5 border-2 border-slate-900 text-slate-900 font-bold uppercase tracking-widest text-sm hover:bg-slate-900 hover:text-white transition-colors duration-300 rounded-sm shadow-[0_10px_20px_rgba(0,0,0,0.1)] hover:shadow-[0_15px_30px_rgba(0,0,0,0.2)] hover:-translate-y-1"
           >
-            اكتشف المزيد
+            {t('about.more')}
           </a>
         </div>
 
@@ -175,9 +193,9 @@ export default function About() {
           {/* من هم موظفونا */}
           <div>
             <div className="text-center mb-10 md:mb-14">
-              <h3 className="text-2xl md:text-3xl font-bold text-slate-900 mb-4">من هم موظفونا</h3>
+              <h3 className="text-2xl md:text-3xl font-bold text-slate-900 mb-4">{t('about.staffTitle')}</h3>
               <p className="text-slate-500 text-sm md:text-base font-medium max-w-2xl mx-auto">
-                لا نقدّم حلولاً تكنولوجية فقط — بل حراساً ورجال أمن مدربين ومؤهلين.
+                {t('about.staffLead')}
               </p>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
@@ -185,7 +203,7 @@ export default function About() {
                 const Icon = staffIcons[i % staffIcons.length];
                 return (
                   <div key={item.title} className="group relative bg-white border border-slate-200 rounded-sm p-6 md:p-7 transition-all duration-300 hover:border-amber-500/60 hover:shadow-[0_18px_40px_rgba(0,0,0,0.08)] hover:-translate-y-1">
-                    <span className="absolute top-0 left-0 w-10 h-[3px] bg-amber-500 transition-all duration-500 group-hover:w-full"></span>
+                    <span className="absolute top-0 end-0 w-10 h-[3px] bg-amber-500 transition-all duration-500 group-hover:w-full"></span>
                     <Icon className="w-8 h-8 text-[#0a1526] mb-5" strokeWidth={1.5} />
                     <h4 className="text-base md:text-lg font-bold text-slate-900 mb-3">{item.title}</h4>
                     <p className="text-slate-600 text-sm leading-relaxed">{item.desc}</p>
@@ -196,64 +214,53 @@ export default function About() {
           </div>
 
           {/* اللباس الرسمي */}
-          <div className="bg-[#0a1526] text-white rounded-sm p-8 md:p-12 relative overflow-hidden">
-            <div className="absolute -top-16 -left-16 w-56 h-56 bg-amber-500/10 rounded-full blur-3xl"></div>
-            <div className="relative flex flex-col md:flex-row items-start gap-6 md:gap-8">
-              <div className="shrink-0 w-14 h-14 md:w-16 md:h-16 rounded-full bg-amber-500/15 border border-amber-500/40 flex items-center justify-center">
-                <Shirt className="w-7 h-7 md:w-8 md:h-8 text-amber-500" strokeWidth={1.5} />
-              </div>
-              <div className="flex-1">
-                <h3 className="text-xl md:text-2xl font-bold mb-4">{uniform.title}</h3>
-                <p className="text-white/75 text-sm md:text-base leading-loose">{uniform.desc}</p>
-              </div>
+          <div className="bg-white border border-slate-200 shadow-sm rounded-sm overflow-hidden flex flex-col lg:flex-row items-stretch group">
+            
+            {/* صورة الزي */}
+            <div className="w-full lg:w-1/2 h-[300px] sm:h-[400px] lg:h-auto relative overflow-hidden">
+              <img 
+                src="/6140a93d-2584-4ba5-93e6-aee4393cd2c2_result.webp" 
+                alt={t('about.altUniform')} 
+                className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+              />
+              {/* تدرج لوني خفيف فوق الصورة للموبايل */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0a1526]/60 to-transparent lg:hidden"></div>
             </div>
-          </div>
-
-          {/* خدمات الشركة */}
-          <div>
-            <div className="text-center mb-10 md:mb-14">
-              <h3 className="text-2xl md:text-3xl font-bold text-slate-900 mb-4">خدمات التي تقدمها الشركة</h3>
-              <p className="text-slate-500 text-sm md:text-base font-medium max-w-2xl mx-auto">
-                تغطية متكاملة للمنشآت والمرافقة والتدريب ونقل الأموال والمناسبات.
-              </p>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
-              {services.map((item, i) => {
-                const Icon = serviceIcons[i % serviceIcons.length];
-                return (
-                  <div key={item.title} className="flex items-start gap-4 bg-white border border-slate-200 rounded-sm p-6 transition-all duration-300 hover:border-amber-500/60 hover:shadow-[0_14px_30px_rgba(0,0,0,0.07)]">
-                    <div className="shrink-0 w-11 h-11 rounded-sm bg-[#0a1526] flex items-center justify-center">
-                      <Icon className="w-5 h-5 text-amber-500" strokeWidth={1.6} />
-                    </div>
-                    <div>
-                      <h4 className="text-base font-bold text-slate-900 mb-2">{item.title}</h4>
-                      <p className="text-slate-600 text-sm leading-relaxed">{item.desc}</p>
-                    </div>
+            
+            {/* محتوى الزي */}
+            <div className="w-full lg:w-1/2 p-8 md:p-12 lg:p-16 flex flex-col justify-center relative bg-[#0a1526] text-white">
+              {/* تأثير إضاءة خلفي خفيف */}
+              <div className="absolute -top-16 -end-16 w-64 h-64 bg-slate-700/20 rounded-full blur-3xl pointer-events-none"></div>
+              
+              <div className="relative">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-12 h-12 rounded-sm bg-white/10 border border-white/20 flex items-center justify-center shrink-0">
+                    <Shirt className="w-6 h-6 text-white" strokeWidth={1.5} />
                   </div>
-                );
-              })}
+                  <h3 className="text-2xl md:text-3xl font-bold">{uniform.title}</h3>
+                </div>
+                
+                <p className="text-white/80 text-base leading-loose mb-10 max-w-lg">
+                  {uniform.desc}
+                </p>
+                
+                {/* زر الانتقال لصفحة الزي */}
+                <div>
+                  <Link
+                    to="/suit"
+                    className="inline-flex items-center justify-center px-8 py-3.5 bg-white text-[#0a1526] font-bold text-sm transition-all duration-300 rounded-sm hover:bg-slate-200 shadow-[0_5px_15px_rgba(255,255,255,0.1)] hover:-translate-y-1"
+                  >
+                    {t('about.uniformCta')}
+                    <svg xmlns="http://www.w3.org/2000/svg" className={`h-5 w-5 ms-3 ${dir === 'ltr' ? '' : 'rotate-180'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                  </Link>
+                </div>
+              </div>
             </div>
-          </div>
-
-          {/* زر العمل معنا */}
-          <div className="border-2 border-slate-900 rounded-sm p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-right">
-            <div>
-              <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-3">تعمل معنا؟</h3>
-              <p className="text-slate-600 text-sm md:text-base max-w-xl">
-                نبحث عن أشخاص ملتزمين بالانضباط والجاهزية. أرسل سيرتك وبياناتك وسيتم التواصل معك مباشرة.
-              </p>
-            </div>
-            <a
-              href="#contact"
-              className="shrink-0 inline-flex items-center justify-center gap-2 px-9 py-4 bg-amber-500 hover:bg-[#0a1526] hover:text-white text-[#0a1526] font-bold text-sm tracking-widest uppercase transition-colors duration-300 rounded-sm shadow-lg shadow-amber-500/10"
-            >
-              <Briefcase className="w-4 h-4" />
-              أرسل طلبك
-            </a>
           </div>
 
         </div>
-
       </div>
     </section>
   );

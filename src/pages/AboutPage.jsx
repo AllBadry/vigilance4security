@@ -2,70 +2,17 @@ import { useRef, useEffect } from 'react';
 import { Link } from 'react-router';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import {
-  ShieldCheck, Eye, Target, Gem, Radar, ChevronLeft, Phone, Mail, ArrowLeft,
-  Shield, Award, GraduationCap, HeartPulse, Shirt,
-} from 'lucide-react';
-import {
-  aboutHero, pillars, taglines, staff, uniform, milestones, services, footage, contact,
-} from '../data/about';
+import { ChevronRight, Phone, Mail, ArrowLeft } from 'lucide-react';
+import { contact } from '../data/about';
+import { useLang } from '../i18n/useLang';
 import '../styles/fonts.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const pillarIcons = [ShieldCheck, Target, Eye, Gem, Radar];
-const staffIcons = [Shield, Award, GraduationCap, HeartPulse];
-
-function LazyClip({ src, poster, caption, credit }) {
-  const wrapRef = useRef(null);
-  const videoRef = useRef(null);
-
-  useEffect(() => {
-    const el = wrapRef.current;
-    const video = videoRef.current;
-    if (!el || !video) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const play = video.play();
-            if (play && typeof play.catch === 'function') play.catch(() => {});
-          } else {
-            video.pause();
-          }
-        });
-      },
-      { rootMargin: '200px' }
-    );
-
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-
-  return (
-    <figure ref={wrapRef} className="group relative h-[320px] md:h-[420px] overflow-hidden rounded-sm bg-[#050d1a] border border-white/10">
-      <video
-        ref={videoRef}
-        src={src}
-        {...(poster ? { poster } : {})}
-        muted
-        loop
-        playsInline
-        preload="none"
-        className="w-full h-full object-cover scale-105 group-hover:scale-100 transition-transform duration-[1200ms]"
-      />
-      <div className="absolute inset-0 bg-gradient-to-t from-[#050d1a] via-[#050d1a]/25 to-transparent" />
-      <figcaption className="absolute bottom-0 right-0 left-0 p-5 flex items-end justify-between gap-3">
-        <span className="text-sm md:text-base font-bold text-white">{caption}</span>
-        <span className="text-[10px] text-white/45 shrink-0">Pexels · {credit}</span>
-      </figcaption>
-    </figure>
-  );
-}
-
 export default function AboutPage() {
   const rootRef = useRef(null);
+  const { t, dir, content } = useLang();
+  const { aboutHero, pillars, taglines, milestones, services } = content;
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -199,15 +146,6 @@ export default function AboutPage() {
             },
           });
         });
-
-        gsap.from('.ab-clips > *', {
-          y: 50,
-          opacity: 0,
-          duration: 1,
-          stagger: 0.12,
-          ease: 'power3.out',
-          scrollTrigger: { trigger: '.ab-clips', start: 'top 82%' },
-        });
       });
     }, rootRef);
 
@@ -216,12 +154,12 @@ export default function AboutPage() {
   }, []);
 
   return (
-    <div ref={rootRef} dir="rtl" className="font-cairo bg-[#050d1a] text-white overflow-x-clip">
+    <div ref={rootRef} dir={dir} className="font-cairo bg-[#050d1a] text-white overflow-x-clip">
       <section className="ab-hero v4s-noise relative h-screen w-full overflow-hidden bg-[#0a192f]">
         <div className="absolute inset-0 h-[120%] -top-[10%]">
           <div className="ab-hero-media h-full w-full">
             <video
-              src={aboutHero.video}
+              src="/gemini_generated_video_fa555fe7.mp4"
               autoPlay
               muted
               loop
@@ -258,8 +196,8 @@ export default function AboutPage() {
             {aboutHero.tagline}
           </p>
           <a href="#journey" className="group mt-10 inline-flex items-center gap-2 w-fit text-white font-bold text-lg border-b border-white/40 pb-1 hover:border-amber-400 hover:text-amber-400 transition-all">
-            رحلتنا
-            <ChevronLeft className="w-5 h-5 group-hover:-translate-x-2 transition-transform" />
+            {t('aboutPage.journey')}
+            <ChevronRight className={`w-5 h-5 transition-transform ${dir === 'ltr' ? 'group-hover:translate-x-2' : 'rotate-180 group-hover:-translate-x-2'}`} />
           </a>
         </div>
       </section>
@@ -270,91 +208,29 @@ export default function AboutPage() {
             className="ab-mark v4s-wordmark v4s-clip-x text-center text-[16vw] md:text-[11vw] font-black uppercase leading-none tracking-tighter select-none"
             style={{ backgroundImage: 'url("https://images.pexels.com/photos/830891/pexels-photo-830891.jpeg?auto=compress&cs=tinysrgb&w=2000")' }}
           >
-            VIGILANCE
+            {t('aboutPage.wordmark')}
           </h2>
-          <div className="ab-reveal mt-14 grid gap-8 md:grid-cols-2">
-            {pillars.map((pillar, i) => {
-              const Icon = pillarIcons[i] || ShieldCheck;
-              return (
-                <article
-                  key={pillar.title}
-                  className="group relative p-7 md:p-8 rounded-sm border border-white/10 bg-white/[0.02] hover:border-amber-500/50 transition-colors duration-500"
-                >
-                  <div className="flex items-center gap-4 mb-5">
-                    <span className="w-11 h-11 rounded-full bg-amber-500/10 border border-amber-500/30 flex items-center justify-center shrink-0">
-                      <Icon className="w-5 h-5 text-amber-400" />
-                    </span>
-                    <h3 className="text-xl md:text-2xl font-bold text-white">{pillar.title}</h3>
-                  </div>
-                  <p className="text-slate-400 text-base leading-loose font-medium">{pillar.desc}</p>
-                </article>
-              );
-            })}
-          </div>
+         
         </div>
       </section>
 
-      <section className="relative bg-[#050d1a] py-24 md:py-32">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="ab-reveal flex flex-col items-center text-center mb-16">
-            <div className="inline-flex items-center gap-3 mb-4">
-              <span className="w-8 h-[1px] bg-amber-500" />
-              <span className="text-amber-500 font-bold text-xs tracking-[0.2em] uppercase">موظفونا</span>
-              <span className="w-8 h-[1px] bg-amber-500" />
-            </div>
-            <h2 className="text-3xl md:text-5xl font-black text-white leading-tight">
-              كوادر <span className="text-amber-400">مؤهلة</span>
-            </h2>
-            <p className="mt-6 text-slate-400 max-w-2xl leading-loose font-medium">
-              لا نقدّم حلولاً تكنولوجية فقط — بل حراساً ورجال أمن مدربين ومؤهلين.
-            </p>
-          </div>
-
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {staff.map((item, i) => {
-              const Icon = staffIcons[i] || Shield;
-              return (
-                <article
-                  key={item.title}
-                  className="ab-reveal group relative p-7 rounded-sm border border-white/10 bg-white/[0.02] hover:border-amber-500/50 transition-colors duration-500"
-                >
-                  <span className="w-12 h-12 rounded-full bg-amber-500/10 border border-amber-500/30 flex items-center justify-center mb-5">
-                    <Icon className="w-5 h-5 text-amber-400" />
-                  </span>
-                  <h3 className="text-lg md:text-xl font-bold text-white mb-3">{item.title}</h3>
-                  <p className="text-slate-400 text-sm leading-loose font-medium">{item.desc}</p>
-                </article>
-              );
-            })}
-          </div>
-
-          <div className="ab-reveal mt-8 rounded-sm border border-amber-500/30 bg-amber-500/[0.04] p-7 md:p-9 flex flex-col md:flex-row gap-6 items-start md:items-center">
-            <span className="w-14 h-14 rounded-full bg-amber-500/15 border border-amber-500/40 flex items-center justify-center shrink-0">
-              <Shirt className="w-6 h-6 text-amber-400" />
-            </span>
-            <div>
-              <h3 className="text-xl md:text-2xl font-bold text-white mb-3">{uniform.title}</h3>
-              <p className="text-slate-300 leading-loose font-medium">{uniform.desc}</p>
-            </div>
-          </div>
-        </div>
-      </section>
+     
 
       <section id="journey" className="relative bg-[#0a1526] py-24 md:py-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="ab-reveal flex flex-col items-center text-center mb-20">
             <div className="inline-flex items-center gap-3 mb-4">
               <span className="w-8 h-[1px] bg-amber-500" />
-              <span className="text-amber-500 font-bold text-xs tracking-[0.2em] uppercase">مسار المجموعة</span>
+              <span className="text-amber-500 font-bold text-xs tracking-[0.2em] uppercase">{t('aboutPage.timelineKicker')}</span>
               <span className="w-8 h-[1px] bg-amber-500" />
             </div>
             <h2 className="text-3xl md:text-5xl font-black text-white leading-tight">
-              من الفكرة إلى <span className="text-transparent bg-clip-text bg-gradient-to-l from-amber-400 to-amber-600">الحماية</span>
+              {t('aboutPage.timelineTitleA')} <span className="text-transparent bg-clip-text bg-gradient-to-l from-amber-400 to-amber-600">{t('aboutPage.timelineTitleB')}</span>
             </h2>
           </div>
 
           <div className="ab-timeline relative">
-            <div className="absolute top-0 bottom-0 right-[22px] md:right-1/2 w-px bg-white/10 md:translate-x-px">
+            <div className={`absolute top-0 bottom-0 start-[22px] md:start-1/2 w-px bg-white/10 ${dir === 'ltr' ? 'md:-translate-x-px' : 'md:translate-x-px'}`}>
               <div className="ab-timeline-fill h-full w-full bg-gradient-to-b from-amber-400 to-amber-600" />
             </div>
 
@@ -366,12 +242,12 @@ export default function AboutPage() {
                     i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
                   }`}
                 >
-                  <div className="absolute top-2 right-0 md:right-1/2 md:translate-x-1/2 w-11 h-11 rounded-full bg-[#050d1a] border border-amber-500/50 flex items-center justify-center shrink-0 z-10">
+                  <div className={`absolute top-2 start-0 md:start-1/2 w-11 h-11 rounded-full bg-[#050d1a] border border-amber-500/50 flex items-center justify-center shrink-0 z-10 ${dir === 'ltr' ? 'md:-translate-x-1/2' : 'md:translate-x-1/2'}`}>
                     <span className="text-amber-400 text-sm font-black tabular-nums">
                       {mile.year ?? String(i + 1).padStart(2, '0')}
                     </span>
                   </div>
-                  <div className={`flex-1 ${i % 2 === 0 ? 'md:text-left' : 'md:text-right'}`}>
+                  <div className={`flex-1 ${i % 2 === 0 ? 'md:text-end' : 'md:text-start'}`}>
                     <div className="rounded-sm border border-white/10 bg-white/[0.02] p-6 md:p-8">
                       <h3 className="text-xl md:text-2xl font-bold text-white mb-3">{mile.title}</h3>
                       <p className="text-slate-400 leading-loose font-medium">{mile.desc}</p>
@@ -390,11 +266,11 @@ export default function AboutPage() {
           <div className="ab-reveal flex flex-col items-center text-center mb-16">
             <div className="inline-flex items-center gap-3 mb-4">
               <span className="w-8 h-[1px] bg-amber-500" />
-              <span className="text-amber-500 font-bold text-xs tracking-[0.2em] uppercase">خدمات الشركة</span>
+              <span className="text-amber-500 font-bold text-xs tracking-[0.2em] uppercase">{t('aboutPage.servicesKicker')}</span>
               <span className="w-8 h-[1px] bg-amber-500" />
             </div>
             <h2 className="text-3xl md:text-5xl font-black text-white leading-tight">
-              خدمات <span className="text-amber-400">نقدمها</span>
+              {t('aboutPage.servicesTitleA')} <span className="text-amber-400">{t('aboutPage.servicesTitleB')}</span>
             </h2>
           </div>
 
@@ -402,9 +278,7 @@ export default function AboutPage() {
             {services.map((item, i) => (
               <article
                 key={item.title}
-                className={`group relative overflow-hidden rounded-sm h-[380px] border border-white/10 ${
-                  i === 0 ? 'lg:col-span-2' : ''
-                }`}
+                className={`group relative overflow-hidden rounded-sm h-[380px] border border-white/10 ${i === 0 ? 'lg:col-span-2' : ''}`}
               >
                 <img
                   src={item.image}
@@ -428,43 +302,19 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="relative bg-[#050d1a] py-24 md:py-32">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="ab-reveal flex flex-col items-center text-center mb-16">
-            <div className="inline-flex items-center gap-3 mb-4">
-              <span className="w-8 h-[1px] bg-amber-500" />
-              <span className="text-amber-500 font-bold text-xs tracking-[0.2em] uppercase">من الميدان</span>
-              <span className="w-8 h-[1px] bg-amber-500" />
-            </div>
-            <h2 className="text-3xl md:text-5xl font-black text-white leading-tight">
-              حماية <span className="text-amber-400">بلا انقطاع</span>
-            </h2>
-          </div>
-
-          <div className="ab-clips grid gap-6 sm:grid-cols-2">
-            {footage.map((clip) => (
-              <LazyClip key={clip.src} {...clip} />
-            ))}
-          </div>
-          <p className="ab-reveal mt-8 text-center text-xs text-white/35">
-            المقاطع التوضيحية من Pexels ولا تمثل عمليات فعلية للمجموعة.
-          </p>
-        </div>
-      </section>
-
       <section className="relative overflow-hidden bg-[#0a1526] py-24 md:py-28">
         <div className="ab-panel relative h-[220vh]">
           <div className="ab-panel-img sticky top-0 h-screen w-full">
             <img
-              src="/Security Escort.jpg"
-              alt="مرافقة أمنية"
+              src="/Security Escort_result.webp"
+              alt={t('aboutPage.altEscort')}
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#0a1526] via-[#0a1526]/60 to-[#0a1526]/30" />
           </div>
           <div className="ab-panel-copy sticky top-0 h-screen w-full flex items-center justify-center px-4 -mt-screen">
             <div className="text-center max-w-3xl">
-              <p className="text-amber-400 text-xs font-bold tracking-[0.25em] uppercase mb-6">خلاصة</p>
+              <p className="text-amber-400 text-xs font-bold tracking-[0.25em] uppercase mb-6">{t('aboutPage.summaryKicker')}</p>
               <h2 className="text-3xl md:text-5xl lg:text-6xl font-black text-white leading-tight drop-shadow-2xl">
                 {pillars[0].desc}
               </h2>
@@ -475,18 +325,18 @@ export default function AboutPage() {
 
       <section className="relative bg-[#050d1a] py-20 md:py-24">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="ab-reveal text-2xl md:text-4xl font-black text-white mb-5">هل تبحث عن حماية متكاملة؟</h2>
+          <h2 className="ab-reveal text-2xl md:text-4xl font-black text-white mb-5">{t('aboutPage.ctaTitle')}</h2>
           <p className="ab-reveal text-slate-400 mb-10 leading-loose font-medium">
             {taglines[1]}
           </p>
           <div className="ab-reveal flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a
-              href="/#contact"
+            <Link
+              to="/contact"
               className="inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-amber-500 text-[#0a192f] font-bold rounded-sm hover:bg-white transition-colors"
             >
               <Phone className="w-4 h-4" />
-              تواصل معنا
-            </a>
+              {t('aboutPage.ctaContact')}
+            </Link>
             <a
               href={`mailto:${contact.emails[0]}`}
               className="inline-flex items-center justify-center gap-2 px-8 py-3.5 border border-white/20 text-white font-bold rounded-sm hover:border-amber-400 hover:text-amber-400 transition-colors"
@@ -499,28 +349,13 @@ export default function AboutPage() {
             to="/"
             className="ab-reveal group mt-12 inline-flex items-center gap-2 text-white/70 font-bold hover:text-amber-400 transition-colors"
           >
-            <ArrowLeft className="w-4 h-4 rotate-180 group-hover:-translate-x-1 transition-transform" />
-            العودة إلى الرئيسية
+            <ArrowLeft className={`w-4 h-4 transition-transform ${dir === 'ltr' ? 'group-hover:-translate-x-1' : 'rotate-180 group-hover:-translate-x-1'}`} />
+            {t('aboutPage.backHome')}
           </Link>
         </div>
       </section>
 
-      <section className="relative bg-[#0a1526] py-16 md:py-20 border-t border-white/5">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          {taglines.map((line, i) => (
-            <p
-              key={i}
-              className={`ab-reveal font-bold leading-snug ${
-                i === taglines.length - 1
-                  ? 'text-xl md:text-3xl text-amber-400'
-                  : 'text-base md:text-xl text-white/70'
-              } ${i < taglines.length - 1 ? 'mb-5' : ''}`}
-            >
-              {line}
-            </p>
-          ))}
-        </div>
-      </section>
+      
     </div>
   );
 }

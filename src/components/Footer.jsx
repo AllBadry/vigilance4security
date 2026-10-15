@@ -1,7 +1,9 @@
 import { useEffect, useRef } from 'react';
+import { Link } from 'react-router';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Phone, Mail, MapPin, ShieldCheck, UserCheck, ChevronLeft, PhoneCall } from 'lucide-react';
+import { Phone, Mail, MapPin, ShieldCheck, UserCheck, ChevronLeft, ChevronRight, PhoneCall } from 'lucide-react';
+import { useLang } from '../i18n/useLang';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -9,6 +11,10 @@ export default function Footer() {
   const footerRef = useRef(null);
   const textRef = useRef(null);
   const contentRef = useRef(null);
+  const { t, dir } = useLang();
+
+  const Chevron = dir === 'ltr' ? ChevronRight : ChevronLeft;
+  const chevronHover = dir === 'ltr' ? 'group-hover:translate-x-1' : 'group-hover:-translate-x-1';
 
   useEffect(() => {
     let ctx = gsap.context(() => {
@@ -27,26 +33,26 @@ export default function Footer() {
         y: 30,
         opacity: 0,
         duration: 0.8,
-        stagger: 0.15,
+        stagger: 0.1,
         ease: "power3.out",
         scrollTrigger: {
           trigger: footerRef.current,
-          start: "top 80%",
+          start: "top bottom",
         }
       });
     }, footerRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [t]);
 
   return (
-    <footer ref={footerRef} className="relative w-full bg-[#050d1a] font-cairo pt-24 overflow-hidden border-t border-white/10" dir="rtl">
+    <footer ref={footerRef} dir={dir} className="relative w-full bg-[#050d1a] font-cairo pt-24 overflow-hidden border-t border-white/10">
       
-      {/* 1. صورة مبنى المقر في الخلفية (تم تحسين الوضوح والشكل) */}
+      {/* 1. صورة الخلفية (مبنى مؤسسي) */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <img 
-          src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop" 
-          alt="مبنى مؤسسي أمني" 
+          src="/photo-1486406146926-c627a92ad1ab_result.webp" 
+          alt={t('footer.altBuilding')} 
           className="w-full h-full object-cover grayscale opacity-25"
         />
         {/* تدرج لوني لدمج المبنى بشكل درامي مع الخلفية */}
@@ -62,19 +68,19 @@ export default function Footer() {
           <div className="flex flex-col">
             <div className="flex items-center gap-3 mb-6">
               <div className="w-20 h-20 flex items-center justify-center p-1 ">
-                <img src="./RRvVSLogo.png" alt="شعار اليقظة" className="w-full h-full object-contain" />
+                <img src="/RRvVSLogo_result.webp" alt={t('footer.logoAlt')} className="w-full h-full object-contain" />
               </div>
               <div>
-                <h3 className="text-xl font-black text-white leading-none mb-1">اليَقَظَة</h3>
-                <p className="text-[10px] text-amber-500 tracking-[0.2em] uppercase font-bold">Vigilance For Security</p>
+                <h3 className="text-xl font-black text-white leading-none mb-1">{t('footer.brand')}</h3>
+                <p className="text-[10px] text-amber-500 tracking-[0.2em] uppercase font-bold">{t('footer.brandLatin')}</p>
               </div>
             </div>
             <p className="text-slate-400 text-sm leading-relaxed mb-6 font-medium">
-              الخيار الأول والمعيار الذهبي في قطاع الأمن والحماية. نقدم حلولاً أمنية متكاملة بفضل طواقمنا المدربة تقنياً وميدانياً لضمان سلامة استثماراتك على مدار الساعة.
+              {t('footer.about')}
             </p>
             <div className="flex items-center gap-2 text-slate-300 text-sm bg-white/5 p-3 rounded-sm border border-white/10 w-fit">
               <ShieldCheck className="w-5 h-5 text-amber-500" />
-              <span className="font-bold">مرخصة ومعتمدة رسمياً</span>
+              <span className="font-bold">{t('footer.licensed')}</span>
             </div>
           </div>
 
@@ -82,14 +88,13 @@ export default function Footer() {
           <div className="flex flex-col">
             <h4 className="text-white font-bold text-lg mb-6 flex items-center gap-2">
               <UserCheck className="w-5 h-5 text-amber-500" />
-              الإدارة التنفيذية
+              {t('footer.management')}
             </h4>
             
             <div className="bg-[#0a1526]/80 backdrop-blur-sm p-5 rounded-sm border border-white/10 mb-4 hover:border-amber-500/50 transition-colors shadow-lg">
-              <p className="text-slate-400 text-xs mb-1">المدير العام</p>
-              <h5 className="text-white font-bold text-base mb-3">السيد/ هيثم المغربي</h5>
+              <p className="text-slate-400 text-xs mb-1">{t('footer.generalManager')}</p>
+              <h5 className="text-white font-bold text-base mb-3">{t('footer.generalManagerName')}</h5>
               
-              {/* حل مشكلة انقلاب الرقم هنا عبر dir="ltr" */}
               <div className="flex items-center justify-start gap-2 text-amber-400">
                 <Phone className="w-4 h-4" />
                 <a href="tel:0795602030" className="hover:text-white transition-colors text-sm font-mono tracking-wider font-bold" dir="ltr">
@@ -102,7 +107,7 @@ export default function Footer() {
               <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-amber-500/10 shrink-0">
                 <Mail className="w-4 h-4" />
               </div>
-              <span className="font-mono text-xs">gm@vigilance4security.com</span>
+              <span className="font-mono text-xs" dir="ltr">gm@vigilance4security.com</span>
             </a>
           </div>
 
@@ -110,90 +115,86 @@ export default function Footer() {
           <div className="flex flex-col">
             <h4 className="text-white font-bold text-lg mb-6 flex items-center gap-2">
               <PhoneCall className="w-5 h-5 text-amber-500" />
-              غرفة العمليات والتواصل
+              {t('footer.opsContact')}
             </h4>
             
             <div className="mb-6 bg-white/5 p-4 rounded-sm border border-white/10">
-              <p className="text-slate-400 text-xs mb-2">هاتف الاتصال المباشر</p>
+              <p className="text-slate-400 text-xs mb-2">{t('footer.directLine')}</p>
               
-              {/* حل مشكلة انقلاب الرقم الدولي هنا */}
               <div className="flex justify-start mb-2">
                 <a href="tel:+962772050091" className="text-xl font-bold text-white hover:text-amber-400 transition-colors font-mono tracking-wider" dir="ltr">
                   +962 7 7205 0091
                 </a>
               </div>
               
-              <span className="inline-block bg-red-500/10 text-red-400 text-[10px] font-bold px-2 py-1 rounded-sm border border-red-500/20">
-                اتصال هاتفي فقط (لا يدعم واتساب)
+              <span className="inline-block bg-red-500/10 text-red-400 text-xs font-bold px-2 py-1 rounded">
+                {t('footer.opsDep')}
               </span>
             </div>
 
-            <div className="space-y-4">
-              <a href="mailto:Operation@vigilance4security.com" className="flex items-center gap-3 text-slate-300 hover:text-amber-400 transition-colors text-sm group">
-                <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-amber-500/10 shrink-0">
-                  <Mail className="w-4 h-4" />
-                </div>
-                <div className="flex flex-col">
-                  <span className="text-[10px] text-slate-500 font-bold mb-0.5">قسم العمليات</span>
-                  <span className="font-mono text-[11px]">Operation@vigilance4security.com</span>
-                </div>
-              </a>
-              
-              <a href="mailto:Info@vigilance4security.com" className="flex items-center gap-3 text-slate-300 hover:text-amber-400 transition-colors text-sm group">
-                <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-amber-500/10 shrink-0">
-                  <Mail className="w-4 h-4" />
-                </div>
-                <div className="flex flex-col">
-                  <span className="text-[10px] text-slate-500 font-bold mb-0.5">الاستفسارات العامة</span>
-                  <span className="font-mono text-[11px]">Info@vigilance4security.com</span>
-                </div>
-              </a>
-            </div>
+            <a href="mailto:Operation@vigilance4security.com" className="flex items-center gap-3 text-slate-300 hover:text-amber-400 transition-colors text-sm group">
+              <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-amber-500/10 shrink-0">
+                <Mail className="w-4 h-4" />
+              </div>
+              <div className="flex flex-col min-w-0">
+                <span className="text-[10px] text-slate-500 font-bold mb-0.5">{t('footer.opsDep')}</span>
+                <span className="font-mono text-xs break-all" dir="ltr">Operation@vigilance4security.com</span>
+              </div>
+            </a>
+            
+            <a href="mailto:Info@vigilance4security.com" className="flex items-center gap-3 text-slate-300 hover:text-amber-400 transition-colors text-sm group mt-3">
+              <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-amber-500/10 shrink-0">
+                <Mail className="w-4 h-4" />
+              </div>
+              <div className="flex flex-col">
+                <span className="text-slate-400 text-xs mb-0.5">{t('footer.generalInquiries')}</span>
+                <span className="font-mono text-xs" dir="ltr">Info@vigilance4security.com</span>
+              </div>
+            </a>
           </div>
 
           {/* العمود الرابع: الموقع والروابط */}
           <div className="flex flex-col">
             <h4 className="text-white font-bold text-lg mb-6 flex items-center gap-2">
               <MapPin className="w-5 h-5 text-amber-500" />
-              المقر الرئيسي
+              {t('footer.headquarters')}
             </h4>
             <div className="bg-[#0a1526]/50 p-4 rounded-sm border border-white/5 mb-6">
               <p className="text-slate-300 text-sm leading-relaxed font-medium">
-                المملكة الأردنية الهاشمية<br/>
-                عمان - شارع المدينة المنورة<br/>
-                بجانب شوكولاتة بارفيه
+                {t('footer.address').map((line) => (
+                  <span key={line} className="block">{line}</span>
+                ))}
               </p>
             </div>
             
-            <h4 className="text-white font-bold text-base mb-4">روابط سريعة</h4>
-            <ul className="space-y-3">
-              <li>
-                <a href="/about" className="text-slate-400 hover:text-amber-400 transition-colors text-sm flex items-center gap-2 group w-fit">
-                  <ChevronLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" /> عن الشركة
-                </a>
-              </li>
-              <li>
-                <a href="#services" className="text-slate-400 hover:text-amber-400 transition-colors text-sm flex items-center gap-2 group w-fit">
-                  <ChevronLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" /> الخدمات الأمنية
-                </a>
-              </li>
-              <li>
-                <a href="#contact" className="text-slate-400 hover:text-amber-400 transition-colors text-sm flex items-center gap-2 group w-fit">
-                  <ChevronLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" /> طلب عرض سعر
-                </a>
-              </li>
-            </ul>
+            <h4 className="text-white font-bold text-base mb-4">{t('footer.quickLinks')}</h4>
+            <nav aria-label={t('footer.quickLinks')}>
+              <ul className="space-y-3">
+                {[
+                  { to: '/', label: t('footer.linkHome') },
+                  { to: '/about', label: t('footer.linkAbout') },
+                  { to: '/#services', label: t('footer.linkServices') },
+                  { to: '/suit', label: t('footer.linkUniform') },
+                  { to: '/contact', label: t('footer.linkContact') },
+                ].map((link) => (
+                  <li key={link.to}>
+                    <Link
+                      to={link.to}
+                      className="text-slate-400 hover:text-amber-400 transition-colors text-sm flex items-center gap-2 group w-fit"
+                    >
+                      <Chevron className={`w-4 h-4 ${chevronHover} transition-transform`} /> {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
           </div>
 
         </div>
 
         {/* 3. شريط حقوق النشر */}
         <div className="py-6 flex flex-col md:flex-row items-center justify-between text-xs font-semibold text-slate-500 uppercase tracking-widest relative z-20">
-          <p>© 2026 Vigilance For Security (V4S). All rights reserved.</p>
-          <div className="flex gap-6 mt-4 md:mt-0">
-            <a href="#privacy" className="hover:text-white transition-colors">سياسة الخصوصية</a>
-            <a href="#terms" className="hover:text-white transition-colors">الشروط والأحكام</a>
-          </div>
+          <p>{t('footer.copyright')}</p>
         </div>
       </div>
 
