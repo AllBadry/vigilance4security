@@ -41,6 +41,10 @@ const CHROME_CANDIDATES = [
   '/usr/bin/chromium',
   '/usr/bin/chromium-browser',
   '/snap/bin/chromium',
+  '/snap/bin/google-chrome',
+  '/opt/google/chrome/chrome',
+  '/usr/lib/chromium-browser/chromium-browser',
+  '/usr/lib/chromium/chromium',
   '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
 ].filter(Boolean);
 
