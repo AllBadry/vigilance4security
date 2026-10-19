@@ -177,7 +177,7 @@ export default function AboutPage() {
           </div>
         </div>
 
-        <div className="ab-hero-copy relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full min-h-[100svh] flex flex-col justify-end pt-32 pb-24 md:pb-32">
+        <div className="ab-hero-copy relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full min-h-[100svh] flex flex-col justify-end pt-32 pb-16 md:pb-24">
           <div className="flex flex-wrap w-16 gap-1.5 mb-6 md:mb-8 opacity-60">
             {[...Array(15)].map((_, i) => (
               <div key={i} className="w-1 h-1 bg-white rounded-full" />
@@ -202,15 +202,14 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="relative bg-[#0a1526] py-24 md:py-32">
+      <section className="relative bg-[#0a1526] py-10 md:py-14">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2
-            className="ab-mark v4s-wordmark v4s-clip-x text-center text-[16vw] md:text-[11vw] font-black uppercase leading-none tracking-tighter select-none"
+            className="ab-mark v4s-wordmark v4s-clip-x text-center text-[15vw] md:text-[10vw] font-black uppercase leading-[0.9] tracking-tighter select-none"
             style={{ backgroundImage: 'url("https://images.pexels.com/photos/830891/pexels-photo-830891.jpeg?auto=compress&cs=tinysrgb&w=2000")' }}
           >
             {t('aboutPage.wordmark')}
           </h2>
-         
         </div>
       </section>
 
@@ -302,8 +301,8 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-[#0a1526] py-24 md:py-28">
-        <div className="ab-panel relative h-[220vh]">
+      <section className="relative overflow-hidden bg-[#0a1526] pt-10 md:pt-14 pb-16 md:pb-20">
+        <div className="ab-panel relative h-[115vh] md:h-[130vh]">
           <div className="ab-panel-img sticky top-0 h-[100svh] w-full">
             <img
               src="/Security Escort_result.webp"
