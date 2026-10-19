@@ -1,7 +1,7 @@
 const ar = {
   aboutHero: {
     kicker: "من نحن",
-    title: "مجموعة اليقظة",
+    title: "شركة اليقظة",
     titleAccent: "للأمن والحماية",
     lead: "بدأت قصة اليقظة كقصة استثمارية لحماية الأرواح والممتلكات. بصفتنا القوة المتنامية في قطاع الخدمات الأمنية واللوجستية، سنستمر في إضافة قيمة للمنطقة والعالم.",
     tagline: "الأمن الحقيقي يبدأ قبل وقوع الخطأ.",
@@ -11,7 +11,7 @@ const ar = {
   pillars: [
     {
       title: "من نحن",
-      desc: "مجموعة اليقظة (V4S) هي شركة رائدة في مجال تقديم الحلول الأمنية المتكاملة، نجمع بين الكفاءات البشرية عالية التدريب وأحدث التقنيات التكنولوجية لضمان حماية أصولك.",
+      desc: "شركة اليقظة (V4S) هي شركة رائدة في مجال تقديم الحلول الأمنية المتكاملة، نجمع بين الكفاءات البشرية عالية التدريب وأحدث التقنيات التكنولوجية لضمان حماية أصولك.",
     },
     {
       title: "رؤيتنا",
@@ -70,7 +70,7 @@ const ar = {
     {
       year: null,
       title: "التوسع في الخدمات",
-      desc: "نمو مجموعة اليقظة لتصبح القوة المتنامية في قطاع الخدمات الأمنية واللوجستية، بتغطية تتجاوز العمليات الميدانية.",
+      desc: "نمو شركة اليقظة لتصبح القوة المتنامية في قطاع الخدمات الأمنية واللوجستية، بتغطية تتجاوز العمليات الميدانية.",
     },
     {
       year: null,
@@ -154,7 +154,7 @@ const ar = {
 const en = {
   aboutHero: {
     kicker: "About Us",
-    title: "Vigilance Group",
+    title: "Vigilance Security Company",
     titleAccent: "for Security & Protection",
     lead: "Vigilance began as an investment story built on protecting lives and property. As a growing force in the security and logistics sector, we will continue to add value to the region and the world.",
     tagline: "Real security begins before a mistake is made.",
@@ -164,7 +164,7 @@ const en = {
   pillars: [
     {
       title: "Who We Are",
-      desc: "Vigilance Group (V4S) is a leading provider of integrated security solutions. We combine highly trained human resources with the latest technology to guarantee the protection of your assets.",
+      desc: "Vigilance Security Company (V4S) is a leading provider of integrated security solutions. We combine highly trained human resources with the latest technology to guarantee the protection of your assets.",
     },
     {
       title: "Our Vision",
@@ -211,7 +211,7 @@ const en = {
 
   uniform: {
     title: "Official Uniform",
-    desc: "Vigilance for Security and Protection provides its employees with work clothing in accordance with Ministry of Interior instructions, and covers the full cost of supplying both summer and winter uniforms.",
+    desc: "Vigilance Security Company provides its employees with work clothing in accordance with Ministry of Interior instructions, and covers the full cost of supplying both summer and winter uniforms.",
   },
 
   milestones: [
@@ -223,7 +223,7 @@ const en = {
     {
       year: null,
       title: "Expanding the Services",
-      desc: "Vigilance Group grew to become the rising force in the security and logistics services sector, with coverage extending well beyond field operations.",
+      desc: "Vigilance Security Company grew to become the rising force in the security and logistics services sector, with coverage extending well beyond field operations.",
     },
     {
       year: null,

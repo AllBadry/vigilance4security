@@ -8,10 +8,10 @@ export default function UniformShowcase() {
 
   // قائمة الصور المرجعية للزي الرسمي
   const images = [
-    { id: 'full', src: '/fullsuit_result.webp', ...t('suit.images')[0] },
-    { id: 'chest', src: '/chest_result.webp', ...t('suit.images')[1] },
-    { id: 'shoulder', src: '/shoulder_result.webp', ...t('suit.images')[2] },
-    { id: 'cap', src: '/cap1_result.webp', ...t('suit.images')[3] }
+    { id: 'full', src: '/fullbory_result.webp', ...t('suit.images')[0] },
+    { id: 'chest', src: '/chest1_result.webp', ...t('suit.images')[1] },
+    { id: 'shoulder', src: '/shoulder1_result.webp', ...t('suit.images')[2] },
+    { id: 'cap', src: '/cap-real_result.webp', ...t('suit.images')[3] }
   ];
 
   // حالة لتتبع الصورة المعروضة حالياً (تبدأ بالصورة الكاملة)

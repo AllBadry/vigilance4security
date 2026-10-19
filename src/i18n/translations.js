@@ -25,7 +25,7 @@ export const translations = {
     footer: {
       logoAlt: "شعار اليقظة",
       brand: "اليَقَظَة",
-      brandLatin: "Vigilance For Security",
+      brandLatin: "Vigilance Security Company",
       about:
         "الخيار الأول والمعيار الذهبي في قطاع الأمن والحماية. نقدم حلولاً أمنية متكاملة بفضل طواقمنا المدربة تقنياً وميدانياً لضمان سلامة استثماراتك على مدار الساعة.",
       licensed: "مرخصة ومعتمدة رسمياً",
@@ -46,7 +46,7 @@ export const translations = {
       linkContact: "تواصل معنا",
       linkQuote: "طلب عرض سعر",
       altBuilding: "مبنى مؤسسي أمني",
-      copyright: "© 2026 Vigilance For Security (V4S). All rights reserved.",
+      copyright: "© 2026 Vigilance Security Company (V4S). All rights reserved.",
     },
 
     hero: {
@@ -222,13 +222,13 @@ export const translations = {
       quote: "Request a Quote",
       call: "Call us",
       menu: "Menu",
-      logoAlt: "Vigilance for Security and Protection",
+      logoAlt: "Vigilance Security Company",
     },
 
     footer: {
       logoAlt: "Vigilance logo",
       brand: "VIGILANCE",
-      brandLatin: "Vigilance For Security",
+      brandLatin: "Vigilance Security Company",
       about:
         "The first choice and the gold standard in the security and protection sector. We deliver integrated security solutions through teams trained both technically and in the field, to keep your investments safe around the clock.",
       licensed: "Officially licensed and certified",
@@ -249,7 +249,7 @@ export const translations = {
       linkContact: "Contact Us",
       linkQuote: "Request a Quote",
       altBuilding: "Modern corporate building",
-      copyright: "© 2026 Vigilance For Security (V4S). All rights reserved.",
+      copyright: "© 2026 Vigilance Security Company (V4S). All rights reserved.",
     },
 
     hero: {
@@ -263,7 +263,7 @@ export const translations = {
 
     about: {
       title: "About Vigilance",
-      lead: "Vigilance for Security and Protection delivers innovative, sustainable security solutions that keep your investments safe.",
+      lead: "Vigilance Security Company delivers innovative, sustainable security solutions that keep your investments safe.",
       more: "Discover more",
       staffTitle: "Who are our staff",
       staffLead: "We do not only deliver technology — we deliver trained, qualified guards and security officers.",
@@ -348,7 +348,7 @@ export const translations = {
       eyebrow: "Visual and field identity",
       title: "Approved Official Uniform",
       brandLine: "Vigilance Security Uniform",
-      body: "The official uniform of Vigilance for Security and Protection reflects the highest standards of discipline, presence and professionalism. It was designed and tailored specifically to withstand the demanding conditions of field work, while fully preserving the refined, dignified appearance that matches the level of our clients among major entities and prominent figures.",
+      body: "The official uniform of Vigilance Security Company reflects the highest standards of discipline, presence and professionalism. It was designed and tailored specifically to withstand the demanding conditions of field work, while fully preserving the refined, dignified appearance that matches the level of our clients among major entities and prominent figures.",
       specsTitle: "Standard specifications:",
       specs: [
         "High quality and exceptional durability, engineered for daily field use.",
