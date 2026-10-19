@@ -1,9 +1,9 @@
 export const translations = {
   ar: {
     meta: {
-      title: "مجموعة اليقظة للأمن والحماية",
+      title: "شركة اليقظة للأمن والحماية",
       description:
-        "مجموعة اليقظة للأمن والحماية تقدم حلولاً أمنية متكاملة: أمن المنشآت، المرافقة الأمنية، نقل الأموال، أمن الفعاليات، الاستشارات والتدريب المتخصص على مدار الساعة.",
+        "شركة اليقظة للأمن والحماية تقدم حلولاً أمنية متكاملة: أمن المنشآت، المرافقة الأمنية، نقل الأموال، أمن الفعاليات، الاستشارات والتدريب المتخصص على مدار الساعة.",
     },
 
     common: {
@@ -51,7 +51,7 @@ export const translations = {
 
     hero: {
       altVideo: "مبنى مؤسسي حديث",
-      title1: "بصفتنا مجموعة اليقظة،",
+      title1: "بصفتنا شركة اليقظة،",
       title2: "نضيف قيمة لأمن",
       titleAccent: "الوطن.",
       lead: "بدأت قصة اليقظة كقصة استثمارية لحماية الأرواح والممتلكات. بصفتنا القوة المتنامية في قطاع الخدمات الأمنية واللوجستية، سنستمر في إضافة قيمة للمنطقة والعالم.",
@@ -59,8 +59,8 @@ export const translations = {
     },
 
     about: {
-      title: "عن مجموعة اليقظة",
-      lead: "مجموعة اليقظة للأمن والحماية تقدم حلولاً أمنية مبتكرة ومستدامة لضمان سلامة استثماراتك.",
+      title: "عن شركة اليقظة",
+      lead: "شركة اليقظة للأمن والحماية تقدم حلولاً أمنية مبتكرة ومستدامة لضمان سلامة استثماراتك.",
       more: "اكتشف المزيد",
       staffTitle: "من هم موظفونا",
       staffLead: "لا نقدّم حلولاً تكنولوجية فقط — بل حراساً ورجال أمن مدربين ومؤهلين.",
@@ -145,7 +145,7 @@ export const translations = {
       eyebrow: "الهوية البصرية والميدانية",
       title: "الزي الرسمي المعتمد",
       brandLine: "Vigilance Security Uniform",
-      body: "يعكس الزي الرسمي لمجموعة اليقظة للأمن والحماية أعلى معايير الانضباط، الهيبة، والاحترافية. تم تصميمه وتفصيله خصيصاً ليتحمل ظروف العمل الميداني الشاقة، مع الحفاظ التام على المظهر الفاخر واللائق الذي يتماشى مع مستوى عملائنا من الكيانات الكبرى والشخصيات الهامة.",
+      body: "يعكس الزي الرسمي لشركة اليقظة للأمن والحماية أعلى معايير الانضباط، الهيبة، والاحترافية. تم تصميمه وتفصيله خصيصاً ليتحمل ظروف العمل الميداني الشاقة، مع الحفاظ التام على المظهر الفاخر واللائق الذي يتماشى مع مستوى عملائنا من الكيانات الكبرى والشخصيات الهامة.",
       specsTitle: "المواصفات القياسية:",
       specs: [
         "جودة عالية ومتانة فائقة مصممة للاستخدام الميداني اليومي.",
@@ -167,7 +167,7 @@ export const translations = {
 
     contactPage: {
       badge: "فريق الدعم والعمليات",
-      title: "تواصل مع مجموعة اليقظة",
+      title: "تواصل مع شركة اليقظة",
       lead: "نحن هنا لتلبية كافة احتياجاتك الأمنية. فريقنا من الخبراء مستعد لتقديم الاستشارة وتصميم الحلول والحماية المناسبة لمنشأتك أو شخصك.",
       adminTitle: "الإدارة العامة",
       address: ["المملكة الأردنية الهاشمية", "عمان - شارع المدينة المنورة", "بجانب شوكولاتة بارفيه"],
@@ -204,9 +204,9 @@ export const translations = {
 
   en: {
     meta: {
-      title: "Vigilance Group | Security & Protection Services",
+      title: "Vigilance | Security & Protection Services",
       description:
-        "Vigilance Group (V4S) delivers integrated security solutions: facility guarding, VIP security escort, cash transport, event security, consulting and specialized training — around the clock.",
+        "Vigilance (V4S) delivers integrated security solutions: facility guarding, VIP security escort, cash transport, event security, consulting and specialized training — around the clock.",
     },
 
     common: {
@@ -254,7 +254,7 @@ export const translations = {
 
     hero: {
       altVideo: "Modern corporate building",
-      title1: "As Vigilance Group,",
+      title1: "As Vigilance,",
       title2: "we add value to the security of",
       titleAccent: "the nation.",
       lead: "Vigilance began as an investment story built on protecting lives and property. As a growing force in the security and logistics sector, we will continue to add value to the region and the world.",
@@ -262,8 +262,8 @@ export const translations = {
     },
 
     about: {
-      title: "About Vigilance Group",
-      lead: "Vigilance Group for Security and Protection delivers innovative, sustainable security solutions that keep your investments safe.",
+      title: "About Vigilance",
+      lead: "Vigilance for Security and Protection delivers innovative, sustainable security solutions that keep your investments safe.",
       more: "Discover more",
       staffTitle: "Who are our staff",
       staffLead: "We do not only deliver technology — we deliver trained, qualified guards and security officers.",
@@ -348,7 +348,7 @@ export const translations = {
       eyebrow: "Visual and field identity",
       title: "Approved Official Uniform",
       brandLine: "Vigilance Security Uniform",
-      body: "The official uniform of Vigilance Group for Security and Protection reflects the highest standards of discipline, presence and professionalism. It was designed and tailored specifically to withstand the demanding conditions of field work, while fully preserving the refined, dignified appearance that matches the level of our clients among major entities and prominent figures.",
+      body: "The official uniform of Vigilance for Security and Protection reflects the highest standards of discipline, presence and professionalism. It was designed and tailored specifically to withstand the demanding conditions of field work, while fully preserving the refined, dignified appearance that matches the level of our clients among major entities and prominent figures.",
       specsTitle: "Standard specifications:",
       specs: [
         "High quality and exceptional durability, engineered for daily field use.",
@@ -370,7 +370,7 @@ export const translations = {
 
     contactPage: {
       badge: "Support & Operations Team",
-      title: "Contact Vigilance Group",
+      title: "Contact Vigilance",
       lead: "We are here to meet all your security needs. Our team of experts is ready to advise you and design the right protection and solutions for your organization or for you personally.",
       adminTitle: "General Administration",
       address: ["Hashemite Kingdom of Jordan", "Amman – Al Madinah Al Munawwarah St.", "Next to Parfait Chocolate"],
