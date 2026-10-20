@@ -51,10 +51,10 @@ export const translations = {
 
     hero: {
       altVideo: "مبنى مؤسسي حديث",
-      title1: "بصفتنا شركة اليقظة،",
+      title1: "شركة اليقظة",
       title2: "نضيف قيمة لأمن",
-      titleAccent: "الوطن.",
-      lead: "بدأت قصة اليقظة كقصة استثمارية لحماية الأرواح والممتلكات. بصفتنا القوة المتنامية في قطاع الخدمات الأمنية واللوجستية، سنستمر في إضافة قيمة للمنطقة والعالم.",
+      titleAccent: "منشئاتكم",
+      lead: "بدأت قصة اليقظة كقصة استثمارية لحماية المنشئات والممتلكات. بصفتنا القوة المتنامية في قطاع الخدمات الأمنية واللوجستية، سنستمر في إضافة قيمة للمنطقة والعالم.",
       cta: "عن اليقظة",
     },
 
@@ -254,10 +254,10 @@ export const translations = {
 
     hero: {
       altVideo: "Modern corporate building",
-      title1: "As Vigilance,",
+      title1: "Vigilance Security Company",
       title2: "we add value to the security of",
-      titleAccent: "the nation.",
-      lead: "Vigilance began as an investment story built on protecting lives and property. As a growing force in the security and logistics sector, we will continue to add value to the region and the world.",
+      titleAccent: "your facilities",
+      lead: "Vigilance began as an investment story built on protecting facilities and property. As a growing force in the security and logistics sector, we will continue to add value to the region and the world.",
       cta: "About Vigilance",
     },
 

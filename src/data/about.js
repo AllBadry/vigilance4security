@@ -39,8 +39,8 @@ const ar = {
 
   staff: [
     {
-      title: "ضباط سابقون",
-      desc: "ضباط سابقون من القوات المسلحة والأجهزة الأمنية.",
+      title: "ضباط وضباط صف",
+      desc: "ضباط وضباط صف سابقون من القوات المسلحة والأجهزة الأمنية.",
     },
     {
       title: "تدريب متخصص",
@@ -48,7 +48,7 @@ const ar = {
     },
     {
       title: "رفع الكفاءة",
-      desc: "رفع كفاءة الكوادر الأردنية من خلال دورات تُعقد داخل الشركة ومراكز التدريب الخارجية حسب الطلب.",
+      desc: "رفع كفاءة الموظفيين من خلال دورات تُعقد داخل الشركة ومراكز التدريب الخارجية حسب الطلب.",
     },
     {
       title: "لياقة كاملة",
@@ -192,8 +192,8 @@ const en = {
 
   staff: [
     {
-      title: "Former Officers",
-      desc: "Former officers from the armed forces and the security agencies.",
+      title: "Officers and Non-Commissioned Officers",
+      desc: "Former officers and non-commissioned officers from the armed forces and the security agencies.",
     },
     {
       title: "Specialized Training",
@@ -201,7 +201,7 @@ const en = {
     },
     {
       title: "Capacity Building",
-      desc: "Raising the competence of Jordanian personnel through courses held inside the company and at external training centres on request.",
+      desc: "Raising the competence of our employees through courses held inside the company and at external training centres on request.",
     },
     {
       title: "Full Fitness",
