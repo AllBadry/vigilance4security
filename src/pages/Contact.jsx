@@ -1,16 +1,45 @@
 import { useState } from 'react';
-import { Phone, Mail, Send, Shield, Building, CheckCircle2, ChevronDown } from 'lucide-react';
+import { Phone, Mail, Send, Shield, Building, CheckCircle2, ChevronDown, AlertCircle } from 'lucide-react';
 import { useLang } from '../i18n/useLang';
 
 export default function Contact() {
-  const [isSubmitted, setIsSubmitted] = useState(false);
   const { t, dir } = useLang();
 
-  const handleSubmit = (e) => {
+  // حالة التحكم بإرسال الفورم بنجاح
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  
+  // حالة التحكم في البوب أب الخاص بالأخطاء
+  const [errorPopup, setErrorPopup] = useState({ isOpen: false, message: '' });
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // هنا يتم ربط النموذج مع الباك إند (مثل EmailJS أو API خاص بك)
-    setIsSubmitted(true);
-    setTimeout(() => setIsSubmitted(false), 5000);
+    
+    // جمع البيانات من الفورم تلقائياً
+    const formData = new FormData(e.target);
+    
+    // إضافة مفتاح الوصول الخاص بك
+    formData.append("access_key", "4f91c05a-7e40-4986-a7ba-613c95776252");
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setIsSubmitted(true); 
+        e.target.reset(); 
+        setTimeout(() => setIsSubmitted(false), 5000); 
+      } else {
+        console.error("خطأ في الإرسال:", data);
+        setErrorPopup({ isOpen: true, message: dir === 'ltr' ? "An error occurred during submission, please try again later." : "حدث خطأ أثناء الإرسال، يرجى المحاولة لاحقاً." });
+      }
+    } catch (error) {
+      console.error("خطأ في الاتصال:", error);
+      setErrorPopup({ isOpen: true, message: dir === 'ltr' ? "Could not connect to the server, please check your internet connection." : "تعذر الاتصال بخوادم الإرسال، يرجى التأكد من اتصالك بالإنترنت." });
+    }
   };
 
   return (
@@ -36,7 +65,7 @@ export default function Contact() {
         </div>
       </div>
 
-      {/* قسم المحتوى الرئيسي (مرفوع قليلاً للأعلى ليغطي جزء من الرأس الغامق) */}
+      {/* قسم المحتوى الرئيسي */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-16 relative z-20 pb-24">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           
@@ -117,6 +146,7 @@ export default function Contact() {
                     <input 
                       type="text" 
                       id="name" 
+                      name="Full_Name" 
                       required 
                       className="w-full bg-slate-50 border border-slate-200 text-slate-900 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#0a1526] focus:border-transparent transition-all"
                       placeholder={t('contactPage.namePlaceholder')}
@@ -128,9 +158,10 @@ export default function Contact() {
                     <input 
                       type="tel" 
                       id="phone" 
+                      name="Phone_Number" 
                       required
                       dir="ltr"
-                      className="w-full bg-slate-50 border border-slate-200 text-slate-900 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#0a1526] focus:border-transparent transition-all text-start"
+                      className={`w-full bg-slate-50 border border-slate-200 text-slate-900 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#0a1526] focus:border-transparent transition-all ${dir === 'ltr' ? 'text-left' : 'text-right'}`}
                       placeholder="+962 XXXXXXXX"
                     />
                   </div>
@@ -143,6 +174,7 @@ export default function Contact() {
                     <input 
                       type="email" 
                       id="email" 
+                      name="Email" 
                       required 
                       className="w-full bg-slate-50 border border-slate-200 text-slate-900 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#0a1526] focus:border-transparent transition-all"
                       placeholder="name@company.com"
@@ -154,6 +186,7 @@ export default function Contact() {
                     <input 
                       type="text" 
                       id="company" 
+                      name="Company_Name" 
                       className="w-full bg-slate-50 border border-slate-200 text-slate-900 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#0a1526] focus:border-transparent transition-all"
                       placeholder={t('contactPage.companyPlaceholder')}
                     />
@@ -166,16 +199,17 @@ export default function Contact() {
                   <div className="relative">
                     <select 
                       id="service" 
+                      name="Service_Type" 
                       required
                       className="w-full bg-slate-50 border border-slate-200 text-slate-900 rounded-lg ps-4 pe-11 py-3 focus:outline-none focus:ring-2 focus:ring-[#0a1526] focus:border-transparent transition-all appearance-none"
                     >
                       <option value="">{t('contactPage.servicePlaceholder')}</option>
-                      <option value="facilities">{t('contactPage.serviceOptions')[0]}</option>
-                      <option value="escort">{t('contactPage.serviceOptions')[1]}</option>
-                      <option value="events">{t('contactPage.serviceOptions')[2]}</option>
-                      <option value="cash">{t('contactPage.serviceOptions')[3]}</option>
-                      <option value="consulting">{t('contactPage.serviceOptions')[4]}</option>
-                      <option value="other">{t('contactPage.serviceOptions')[5]}</option>
+                      <option value={t('contactPage.serviceOptions')[0]}>{t('contactPage.serviceOptions')[0]}</option>
+                      <option value={t('contactPage.serviceOptions')[1]}>{t('contactPage.serviceOptions')[1]}</option>
+                      <option value={t('contactPage.serviceOptions')[2]}>{t('contactPage.serviceOptions')[2]}</option>
+                      <option value={t('contactPage.serviceOptions')[3]}>{t('contactPage.serviceOptions')[3]}</option>
+                      <option value={t('contactPage.serviceOptions')[4]}>{t('contactPage.serviceOptions')[4]}</option>
+                      <option value={t('contactPage.serviceOptions')[5]}>{t('contactPage.serviceOptions')[5]}</option>
                     </select>
                     <ChevronDown className="pointer-events-none absolute top-1/2 -translate-y-1/2 end-4 w-5 h-5 text-slate-400" />
                   </div>
@@ -186,6 +220,7 @@ export default function Contact() {
                   <label htmlFor="message" className="block text-sm font-bold text-[#0a1526] mb-2">{t('contactPage.notesLabel')}</label>
                   <textarea 
                     id="message" 
+                    name="Message_Details" 
                     rows="5" 
                     className="w-full bg-slate-50 border border-slate-200 text-slate-900 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#0a1526] focus:border-transparent transition-all resize-none"
                     placeholder={t('contactPage.notesPlaceholder')}
@@ -213,6 +248,37 @@ export default function Contact() {
 
         </div>
       </div>
+
+      {/* بوب أب الأخطاء المخصص (Custom Error Modal) */}
+      {errorPopup.isOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#0a1526]/60 backdrop-blur-sm transition-all animate-in fade-in duration-300">
+          <div className="bg-white rounded-2xl p-8 max-w-sm w-full shadow-2xl relative animate-in zoom-in-95 duration-300">
+            <div className="flex flex-col items-center text-center">
+              
+              {/* أيقونة الخطأ */}
+              <div className="w-16 h-16 bg-red-50 rounded-full flex items-center justify-center mb-5 border border-red-100">
+                <AlertCircle className="w-8 h-8 text-red-500" />
+              </div>
+              
+              <h3 className="text-xl font-bold text-[#0a1526] mb-3">
+                {dir === 'ltr' ? 'Sorry, submission failed' : 'عذراً، لم يتم الإرسال'}
+              </h3>
+              <p className="text-slate-600 mb-8 leading-relaxed">
+                {errorPopup.message}
+              </p>
+              
+              {/* زر الإغلاق */}
+              <button
+                onClick={() => setErrorPopup({ isOpen: false, message: '' })}
+                className="w-full bg-[#0a1526] hover:bg-[#1e293b] text-white font-bold py-3.5 rounded-lg transition-colors shadow-lg hover:shadow-xl"
+              >
+                {dir === 'ltr' ? 'Okay, close' : 'حسناً، إغلاق'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
     </main>
   );
 }
