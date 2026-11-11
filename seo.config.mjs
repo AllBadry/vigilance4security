@@ -3,7 +3,19 @@ export const SITE_NAME = {
   ar: 'شركة اليقظة للأمن والحماية',
   en: 'Vigilance Security Company',
 };
+export const SITE_SHORT_NAME = { ar: 'اليقظة', en: 'V4S' };
 export const OG_LOCALE = { ar: 'ar_AR', en: 'en_US' };
+export const CONTACT = {
+  phone: '+962795602030',
+  opsPhone: '+962772050091',
+  email: 'Info@vigilance4security.com',
+  opsEmail: 'Operation@vigilance4security.com',
+  address: {
+    street: 'شارع المدينة المنورة',
+    city: 'عمّان',
+    country: 'JO',
+  },
+};
 export const OG_IMAGE = {
   url: '/RRvVSLogo_result.webp',
   width: 2000,
@@ -21,6 +33,8 @@ export const PAGES = [
     path: '/',
     changefreq: 'weekly',
     priority: '1.0',
+    pageType: 'WebPage',
+    label: { ar: 'الرئيسية', en: 'Home' },
     ar: {
       title: 'شركة اليقظة للأمن والحماية | حلول أمنية متكاملة في الأردن',
       description:
@@ -36,6 +50,8 @@ export const PAGES = [
     path: '/about',
     changefreq: 'monthly',
     priority: '0.8',
+    pageType: 'AboutPage',
+    label: { ar: 'من نحن', en: 'About Us' },
     ar: {
       title: 'من نحن | شركة اليقظة للأمن والحماية',
       description:
@@ -51,6 +67,8 @@ export const PAGES = [
     path: '/suit',
     changefreq: 'monthly',
     priority: '0.6',
+    pageType: 'WebPage',
+    label: { ar: 'الزي الرسمي', en: 'Official Uniform' },
     ar: {
       title: 'الزي الأمني الرسمي | شركة اليقظة للأمن والحماية',
       description:
@@ -66,6 +84,8 @@ export const PAGES = [
     path: '/contact',
     changefreq: 'monthly',
     priority: '0.9',
+    pageType: 'ContactPage',
+    label: { ar: 'تواصل معنا', en: 'Contact Us' },
     ar: {
       title: 'تواصل معنا وطلب عرض سعر | شركة اليقظة للأمن والحماية',
       description:
@@ -84,7 +104,10 @@ export const canonicalFor = (path) => {
   return `${SITE_URL}${base}`;
 };
 
-export const pageFor = (pathname) => {
-  const clean = pathname.replace(/\/+$/, '') || '/';
-  return PAGES.find((page) => page.path === clean) ?? PAGES[0];
-};
+export const normalizePath = (pathname) => pathname.replace(/\/+$/, '') || '/';
+
+export const isKnownPath = (pathname) =>
+  PAGES.some((page) => page.path === normalizePath(pathname));
+
+export const pageFor = (pathname) =>
+  PAGES.find((page) => page.path === normalizePath(pathname)) ?? PAGES[0];

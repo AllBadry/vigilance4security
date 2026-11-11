@@ -132,8 +132,9 @@ export default function About() {
 
         {/* النص العملاق مع صورة داخلية (Wordmark) */}
         <div className="w-full flex justify-center mb-16 md:mb-20 overflow-hidden relative">
-          <h1
+          <div
             ref={textMaskRef}
+            aria-hidden="true"
             className="text-[18vw] md:text-[16vw] font-black uppercase leading-none tracking-tighter text-center select-none"
             style={{
               backgroundImage: 'url("https://images.pexels.com/photos/830891/pexels-photo-830891.jpeg?auto=compress&cs=tinysrgb&w=2000")',
@@ -146,7 +147,7 @@ export default function About() {
             }}
           >
             VIGILANCE
-          </h1>
+          </div>
         </div>
 
         {/* شريط التبويبات المتناسق */}

@@ -118,6 +118,7 @@ export default function Navbar() {
         {/* الأزرار: الهاتف + اللغة + طلب عرض سعر */}
         <div className="flex items-center gap-3 md:gap-4">
           <a
+            href="tel:+962772050091"
             aria-label={t('nav.call')}
             className="hidden sm:inline-flex w-11 h-11 items-center justify-center rounded-full border border-white/15 text-white/80 hover:text-amber-400 hover:border-amber-400/60 transition-colors"
           >

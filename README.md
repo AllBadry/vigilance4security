@@ -1,5 +1,13 @@
 # React + Vite
 
+## SEO
+
+- `seo.config.mjs` هو المصدر الوحيد لعناوين الصفحات ووصفها و`canonical` وخريطة الموقع.
+- `npm run build` يبني الموقع ويولّد `dist/sitemap.xml` و`dist/robots.txt`.
+- `npm run prerender` يحوّل كل مسار إلى صفحة HTML مستقلة داخل `dist` (يتطلب Chrome/Chromium).
+- `npm run verify:seo` يتحقق من العناوين والوصف و`canonical` و`JSON-LD` وخريطة الموقع.
+- لإضافة صفحة جديدة: أضفها إلى `PAGES` في `seo.config.mjs` ثم أضف المسار في `src/App.jsx`.
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:

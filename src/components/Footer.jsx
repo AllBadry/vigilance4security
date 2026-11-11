@@ -202,13 +202,14 @@ export default function Footer() {
 
       {/* 4. النص العملاق السينمائي في الخلفية السفلية */}
       <div className="absolute bottom-0 w-full flex justify-center pointer-events-none overflow-hidden z-10">
-        <h1 
+        <div
           ref={textRef}
+          aria-hidden="true"
           className="text-[28vw] md:text-[22vw] font-black text-white/[0.03] mix-blend-overlay leading-none select-none tracking-tighter"
           style={{ transform: 'translateY(20px)' }}
         >
           VIGILANCE
-        </h1>
+        </div>
       </div>
       
     </footer>
