@@ -1,0 +1,25 @@
+/* Navbar display fallback for browsers that do not understand Tailwind's
+   modern range media queries such as (width >= 1024px).
+   The file is copied verbatim from public/ so the classic min-width syntax
+   is preserved. No content is added or removed. */
+@media (min-width: 640px) {
+  .sm\:inline-flex {
+    display: inline-flex !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .md\:inline-flex {
+    display: inline-flex !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .lg\:flex {
+    display: flex !important;
+  }
+
+  .lg\:hidden {
+    display: none !important;
+  }
+}

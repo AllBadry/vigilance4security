@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router';
 import { Menu, X, Globe, Phone } from 'lucide-react';
 import { useLang } from '../i18n/useLang';
+import { imageSize } from '../data/imageDimensions';
 
 function LangToggle() {
   const { lang, setLang } = useLang();
@@ -91,10 +92,11 @@ export default function Navbar() {
           <div>
             <img 
               src="/RRvVSLogo_result.webp" 
+              {...imageSize('/RRvVSLogo_result.webp')}
               alt={t('nav.logoAlt')} 
               fetchPriority="high"
               decoding="async"
-              className={`object-contain transition-all duration-300 group-hover:scale-105 ${
+              className={`object-contain w-auto transition-all duration-300 group-hover:scale-105 ${
                 isScrolled ? 'h-10 md:h-12' : 'h-12 md:h-14'
               }`}
             />

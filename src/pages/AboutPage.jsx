@@ -5,6 +5,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ChevronRight, Phone, Mail, ArrowLeft } from 'lucide-react';
 import { contact } from '../data/about';
 import { useLang } from '../i18n/useLang';
+import { imageSize } from '../data/imageDimensions';
 import '../styles/fonts.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -204,12 +205,12 @@ export default function AboutPage() {
 
       <section className="relative bg-[#0a1526] py-10 md:py-14">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2
+          <p
             className="ab-mark v4s-wordmark v4s-clip-x text-center text-[15vw] md:text-[10vw] font-black uppercase leading-[0.9] tracking-tighter select-none"
             style={{ backgroundImage: 'url("https://images.pexels.com/photos/830891/pexels-photo-830891.jpeg?auto=compress&cs=tinysrgb&w=2000")' }}
           >
             {t('aboutPage.wordmark')}
-          </h2>
+          </p>
         </div>
       </section>
 
@@ -281,6 +282,7 @@ export default function AboutPage() {
               >
                 <img
                   src={item.image}
+                  {...imageSize(item.image)}
                   alt={item.title}
                   loading="lazy"
                   className="ab-exp-img absolute inset-0 w-full h-full object-cover"
@@ -306,6 +308,7 @@ export default function AboutPage() {
           <div className="ab-panel-img sticky top-0 h-[100svh] w-full">
             <img
               src="/Security Escort_result.webp"
+              {...imageSize('/Security Escort_result.webp')}
               alt={t('aboutPage.altEscort')}
               loading="lazy"
               decoding="async"
@@ -316,9 +319,9 @@ export default function AboutPage() {
           <div className="ab-panel-copy sticky top-0 h-[100svh] w-full flex items-center justify-center px-4 -mt-[100svh]">
             <div className="text-center max-w-3xl">
               <p className="text-amber-400 text-xs font-bold tracking-[0.25em] uppercase mb-6">{t('aboutPage.summaryKicker')}</p>
-              <h2 className="text-3xl md:text-5xl lg:text-6xl font-black text-white leading-tight drop-shadow-2xl">
+              <p className="text-3xl md:text-5xl lg:text-6xl font-black text-white leading-tight drop-shadow-2xl">
                 {pillars[0].desc}
-              </h2>
+              </p>
             </div>
           </div>
         </div>

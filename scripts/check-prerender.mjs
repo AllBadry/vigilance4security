@@ -57,6 +57,30 @@ for (const page of PAGES) {
   expect(count(html, /<h1[\s>]/g) === 1, `expected exactly one <h1>, found ${count(html, /<h1[\s>]/g)}`);
   expect(html.length > 5000, `suspiciously small output (${html.length} bytes)`);
 
+  const localImages = [...html.matchAll(/<img[^>]*\ssrc="\/[^"]+"[^>]*>/g)].map((match) => match[0]);
+  expect(
+    localImages.every((img) => /\swidth="\d+"/.test(img) && /\sheight="\d+"/.test(img)),
+    'local images must declare intrinsic width/height'
+  );
+
+  if (page.path === '/' || page.path === '/about') {
+    expect(html.includes('"@type":"Service"'), 'service schema missing');
+  }
+  if (page.path !== '/') {
+    expect(
+      html.includes(`"breadcrumb":{"@id":"${canonical}#breadcrumb"}`),
+      'page is not linked to its breadcrumb schema'
+    );
+  }
+
+  //guard the core business data the site must never lose
+  const navbarLogo = html.match(/<header[^>]*>[\s\S]*?<img[^>]*>/)?.[0] ?? '';
+  expect(navbarLogo.includes('w-auto'), 'navbar logo must keep width:auto');
+  expect(html.includes('RRvVSLogo_result.webp'), 'logo missing');
+  expect(html.includes('+962 7 7205 0091'), 'operations phone missing');
+  expect(html.includes('Info@vigilance4security.com'), 'contact email missing');
+  expect(html.includes('شارع المدينة المنورة'), 'address missing');
+
   if (problems.length) {
     for (const problem of problems) fail(`${page.path} — ${problem}`);
   } else {
@@ -85,6 +109,10 @@ else {
   }
   if (!failures) pass('sitemap.xml — all canonical URLs listed');
 }
+
+const navbarFallback = read(join(DIST, 'navbar-fallback.css'));
+if (!navbarFallback.includes('@media (min-width: 1024px)')) fail('navbar-fallback.css — desktop fallback missing');
+else pass('navbar-fallback.css — classic media queries present');
 
 const cname = read(join(DIST, 'CNAME')).trim();
 if (!cname) fail('CNAME — missing');

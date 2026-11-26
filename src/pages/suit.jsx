@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router'; // أو 'react-router-dom' حسب إصدارك
 import { Shield, CheckCircle2, Phone, FileText, BadgeInfo } from 'lucide-react';
 import { useLang } from '../i18n/useLang';
+import { imageSize } from '../data/imageDimensions';
 
 export default function UniformShowcase() {
   const { t, dir } = useLang();
@@ -29,7 +30,7 @@ export default function UniformShowcase() {
           {/* شريط العنوان العلوي */}
           <div className="flex items-center justify-between pb-6 border-b border-white/10">
             <div>
-              <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight">{t('suit.kicker')}</h2>
+              <p className="text-3xl sm:text-4xl font-bold text-white tracking-tight">{t('suit.kicker')}</p>
               <p className="text-slate-300 mt-3 flex items-center gap-2 text-sm sm:text-base">
                 <Shield className="w-5 h-5" />
                 {t('suit.subtitle')}
@@ -54,6 +55,7 @@ export default function UniformShowcase() {
             <div className="relative w-full aspect-[4/5] sm:aspect-auto sm:h-[600px] rounded-2xl overflow-hidden bg-slate-200 shadow-inner border border-slate-200 group">
               <img 
                 src={activeImage.src} 
+                {...imageSize(activeImage.src)}
                 alt={activeImage.alt}
                 fetchPriority="high"
                 decoding="async"
@@ -79,6 +81,7 @@ export default function UniformShowcase() {
                 >
                   <img 
                     src={img.src} 
+                    {...imageSize(img.src)}
                     alt={img.alt}
                     loading="lazy"
                     decoding="async"

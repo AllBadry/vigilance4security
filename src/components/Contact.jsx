@@ -3,6 +3,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Send, CheckCircle2, AlertCircle } from 'lucide-react';
 import { useLang } from '../i18n/useLang';
+import { imageSize } from '../data/imageDimensions';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -95,6 +96,7 @@ export default function Contact() {
       <div className="absolute inset-0 z-0 pointer-events-none">
         <img 
           src="/V4Sback_result.webp" 
+          {...imageSize('/V4Sback_result.webp')}
           alt={t('contactSection.altBg')} 
           loading="lazy"
           decoding="async"

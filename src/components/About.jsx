@@ -4,6 +4,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Shield, Award, GraduationCap, HeartPulse, Shirt } from 'lucide-react';
 import { useLang } from '../i18n/useLang';
+import { imageSize } from '../data/imageDimensions';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -221,6 +222,7 @@ export default function About() {
             <div className="w-full lg:w-1/2 h-[300px] sm:h-[400px] lg:h-auto relative overflow-hidden">
               <img 
                 src="/6140a93d-2584-4ba5-93e6-aee4393cd2c2_result.webp" 
+                {...imageSize('/6140a93d-2584-4ba5-93e6-aee4393cd2c2_result.webp')}
                 alt={t('about.altUniform')} 
                 loading="lazy"
                 decoding="async"

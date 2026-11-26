@@ -12,6 +12,7 @@ import {
   Globe 
 } from 'lucide-react';
 import { useLang } from '../i18n/useLang';
+import { imageSize } from '../data/imageDimensions';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -126,6 +127,7 @@ export default function Services() {
             >
               <img 
                 src={sector.image} 
+                {...imageSize(sector.image)}
                 alt={sector.title} 
                 loading="lazy"
                 decoding="async"

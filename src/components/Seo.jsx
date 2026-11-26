@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router';
 import { useLang } from '../i18n/useLang';
+import { translations } from '../i18n/translations';
+import { content } from '../data/about';
 import {
   SITE_NAME,
   SITE_URL,
@@ -123,6 +125,44 @@ function buildPageSchema({ page, copy, lang, image, alt, known }) {
         },
       ],
     });
+    graph[0].breadcrumb = { '@id': `${pageUrl}#breadcrumb` };
+  }
+
+  //services already visible on the home and about pages, exposed to crawlers
+  //as structured Service entities using the exact site copy.
+  const sourceServices =
+    page.path === '/'
+      ? translations[lang]?.services?.sectors ?? translations.ar.services.sectors
+      : page.path === '/about'
+        ? content[lang]?.services ?? content.ar.services
+        : [];
+
+  if (sourceServices.length) {
+    const listName =
+      page.path === '/'
+        ? translations[lang]?.services?.kicker ?? translations.ar.services.kicker
+        : translations[lang]?.aboutPage?.servicesKicker ??
+          translations.ar.aboutPage.servicesKicker;
+
+    graph[0].mainEntity = {
+      '@type': 'ItemList',
+      name: listName,
+      itemListElement: sourceServices.map((service, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        item: {
+          '@type': 'Service',
+          name: service.title,
+          description: service.desc,
+          serviceType: service.title,
+          provider: { '@id': `${SITE_URL}/#organization` },
+          areaServed: {
+            '@type': 'Country',
+            name: lang === 'ar' ? 'الأردن' : 'Jordan',
+          },
+        },
+      })),
+    };
   }
 
   return { '@context': 'https://schema.org', '@graph': graph };

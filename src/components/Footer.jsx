@@ -4,6 +4,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Phone, Mail, MapPin, ShieldCheck, UserCheck, ChevronLeft, ChevronRight, PhoneCall } from 'lucide-react';
 import { useLang } from '../i18n/useLang';
+import { imageSize } from '../data/imageDimensions';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -52,6 +53,7 @@ export default function Footer() {
       <div className="absolute inset-0 z-0 pointer-events-none">
         <img 
           src="/photo-1486406146926-c627a92ad1ab_result.webp" 
+          {...imageSize('/photo-1486406146926-c627a92ad1ab_result.webp')}
           alt={t('footer.altBuilding')} 
           loading="lazy"
           decoding="async"
@@ -70,7 +72,7 @@ export default function Footer() {
           <div className="flex flex-col">
             <div className="flex items-center gap-3 mb-6">
               <div className="w-20 h-20 flex items-center justify-center p-1 ">
-                <img src="/RRvVSLogo_result.webp" alt={t('footer.logoAlt')} loading="lazy" decoding="async" className="w-full h-full object-contain" />
+                <img src="/RRvVSLogo_result.webp" {...imageSize('/RRvVSLogo_result.webp')} alt={t('footer.logoAlt')} loading="lazy" decoding="async" className="w-full h-full object-contain" />
               </div>
               <div>
                 <h3 className="text-xl font-black text-white leading-none mb-1">{t('footer.brand')}</h3>
